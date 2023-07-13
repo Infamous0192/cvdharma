@@ -123,6 +123,12 @@
                             <div>Pengawasan</div>
                         </a>
                     </li>
+                    <li class="menu-item ">
+                        <a href="<?= Router::baseUrl('kontraktor') ?>" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-notepad"></i>
+                            <div>Kontraktor</div>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-library"></i>

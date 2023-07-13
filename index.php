@@ -596,6 +596,69 @@ $router->get('/pengawasan/:id_pengawasan/:id_pegawai/delete', function ($id_peng
     return Redirect::withMessage('success', 'Data berhasil dihapus')->back();;
 });
 
+/** Kontraktor Section */
+$router->get('/kontraktor', function () use ($template, $db) {
+    $kontraktor = $db->table('kontraktor')->select('id_kontraktor, nama, nama_kontraktor, kategori, kontraktor.tanggal_mulai, kontraktor.tanggal_selesai, status')->join('proyek', 'proyek.id_proyek = kontraktor.id_proyek')->findAll();
+
+    return $template->withLayout('dashboard')->render('kontraktor/index', compact('kontraktor'));
+})->with('auth');
+
+$router->get('/kontraktor/add', function () use ($template, $db) {
+    $proyek = $db->table('proyek')->findAll();
+
+    return $template->withLayout('dashboard')->render('kontraktor/add', compact('proyek'));
+})->with('admin');
+
+$router->post('/kontraktor', function () use ($db) {
+    $success = $db->table('kontraktor')->insert([
+        'nama_kontraktor' => $_POST['nama_kontraktor'],
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'status' => $_POST['status'],
+        'id_proyek' => $_POST['id_proyek'],
+    ]);
+
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal ditambahkan')->to('/kontraktor');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/kontraktor');
+})->with('admin');
+
+$router->get('/kontraktor/:id', function ($id) use ($template, $db) {
+    $proyek = $db->table('proyek')->findAll();
+    $kontraktor = $db->table('kontraktor')->where('id_kontraktor', $id)->find();
+    if ($kontraktor == null) {
+        return Redirect::withMessage('error', 'Gagal memuat data');
+    }
+
+    return $template->withLayout('dashboard')->render('kontraktor/edit', compact('kontraktor', 'proyek'));
+})->with('admin');
+
+$router->post('/kontraktor/:id', function ($id) use ($db) {
+    $success = $db->table('kontraktor')->where('id_kontraktor', $id)->update([
+        'nama_kontraktor' => $_POST['nama_kontraktor'],
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'status' => $_POST['status'],
+        'id_proyek' => $_POST['id_proyek'],
+    ]);
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal diubah')->to('/kontraktor');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil diubah')->to('/kontraktor');
+})->with('admin');
+
+$router->get('/kontraktor/:id/delete', function ($id) use ($db) {
+    $success = $db->table('kontraktor')->where('id_kontraktor', $id)->delete();
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal dihapus')->to('/kontraktor');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/kontraktor');
+})->with('auth');
+
 /** Laporan Section */
 $router->get('/laporan/bangunan', function () use ($template, $db) {
     $laporan = $db->table('pengawasan')->join('proyek', 'proyek.id_proyek = pengawasan.id_proyek')->where('kategori', '\'Bangunan\'')->findAll();

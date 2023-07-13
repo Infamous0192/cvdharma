@@ -91,7 +91,7 @@
                 title: "Daftar Pengawasan Project - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6],
+                    columns: [0, 2, 3, 4, 5, 6, 7],
                     modifier: {
                         selected: null,
                     },
@@ -107,7 +107,7 @@
                 title: "Daftar Pengawasan Project - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6],
+                    columns: [0, 2, 3, 4, 5, 6, 7],
                     modifier: {
                         selected: null,
                     },
