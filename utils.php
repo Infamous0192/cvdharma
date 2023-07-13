@@ -56,7 +56,9 @@ class Redirect
     public static function back()
     {
         $referer = $_SERVER['HTTP_REFERER'] ?? Router::baseUrl();
-        self::to($referer);
+
+        header("Location: " . $referer);
+        exit();
     }
 
     public static function withMessage($name, $message)

@@ -11,20 +11,20 @@
             <input class="form-control" type="text" value="<?= $pengawasan['nama'] ?>" readonly="">
         </div>
         <div class="mb-3">
+            <label class="form-label">Jenis Project</label>
+            <input class="form-control" type="text" value="<?= $pengawasan['kategori'] ?>" readonly="">
+        </div>
+        <div class="mb-3">
             <label class="form-label">Tanggal Mulai</label>
-            <input class="form-control" type="text" value="<?= $pengawasan['tgl_mulai'] ?>" readonly="">
+            <input class="form-control" type="text" value="<?= $pengawasan['tanggal_mulai'] ?>" readonly="">
         </div>
         <div class="mb-3">
             <label class="form-label">Tanggal Selesai</label>
-            <input class="form-control" type="text" value="<?= $pengawasan['tgl_selesai'] ?>" readonly="">
+            <input class="form-control" type="text" value="<?= $pengawasan['tanggal_selesai'] ?>" readonly="">
         </div>
         <div class="mb-3">
             <label class="form-label">Kemajuan</label>
             <input class="form-control" type="text" value="<?= $pengawasan['kemajuan'] ?>" readonly="">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Jenis Project</label>
-            <input class="form-control" type="text" value="<?= $pengawasan['kategori'] ?>" readonly="">
         </div>
         <div class="mb-3">
             <label class="form-label">Keterangan</label>
@@ -54,6 +54,7 @@
                     <select id="role" name="role" class="form-select" required>
                         <option value="Owner">Owner</option>
                         <option value="Pegawai">Pegawai</option>
+                        <option value="Pengawas">Pengawas</option>
                     </select>
                 </div>
                 <button type="submit" name="Submit" class="btn btn-primary">Tambah</button>
@@ -65,7 +66,7 @@
 
 <!-- Striped Rows -->
 <div class="card">
-    <div class="card-header">
+    <div class="card-header pb-0 mb-0">
         <h5>Tabel Pegawai dalam Project</h5>
     </div>
     <div class="table-responsive text-nowrap">
@@ -74,7 +75,6 @@
                 <tr>
                     <th>No. </th>
                     <th>Nama Pegawai</th>
-                    <th>Username</th>
                     <th>Role</th>
                     <?php if (Session::get('level') == 'admin') : ?>
                         <th>Aksi</th>
@@ -89,7 +89,6 @@
                             <strong><?= $i++ ?></strong>
                         </td>
                         <td><?= $data['nama'] ?></td>
-                        <td><?= $data['username'] ?></td>
                         <td><?= $data['role'] ?></td>
                         <?php if (Session::get('level') == 'admin') : ?>
                             <td>
