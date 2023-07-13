@@ -33,6 +33,7 @@ $router->get('/', function () use ($template) {
     return $template->withLayout('dashboard')->render('home');
 })->with('auth');
 
+/** Auth Section */
 $router->get('/login', function () use ($template, $db) {
     if (Session::has('username')) {
         Redirect::to('/');
@@ -66,8 +67,7 @@ $router->get('/logout', function () {
     return Redirect::to('login');
 })->with('auth');
 
-/** Jabatan */
-
+/** Jabatan Section */
 $router->get('/jabatan', function () use ($template, $db) {
     $jabatan = $db->table('jabatan')->findAll();
 
@@ -120,8 +120,7 @@ $router->get('/jabatan/:id/delete', function ($id) use ($db) {
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/jabatan');;
 })->with('auth');
 
-/** Gaji */
-
+/** Gaji Section */
 $router->get('/gaji', function () use ($template, $db) {
     $gaji = $db->table('gaji')->findAll();
 
@@ -178,8 +177,7 @@ $router->get('/gaji/:id/delete', function ($id) use ($db) {
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/gaji');;
 })->with('auth');
 
-/** Pegawai */
-
+/** Pegawai Section */
 $router->get('/pegawai', function () use ($template, $db) {
     $pegawai = $db->table('pegawai')
         ->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
@@ -259,8 +257,7 @@ $router->get('/pegawai/:id/delete', function ($id) use ($db) {
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/pegawai');;
 })->with('auth');
 
-/** Bangunan */
-
+/** Bangunan Section */
 $router->get('/bangunan', function () use ($template, $db) {
     $bangunan = $db->table('proyek')->where('kategori', '\'Bangunan\'')->findAll();
 
@@ -324,8 +321,7 @@ $router->get('/bangunan/:id/delete', function ($id) use ($db) {
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/bangunan');;
 })->with('auth');
 
-/** Jalan */
-
+/** Jalan Section */
 $router->get('/jalan', function () use ($template, $db) {
     $jalan = $db->table('proyek')->where('kategori', '\'Jalan\'')->findAll();
 
@@ -389,8 +385,7 @@ $router->get('/jalan/:id/delete', function ($id) use ($db) {
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/jalan');;
 })->with('auth');
 
-/** Jembatan */
-
+/** Jembatan Section */
 $router->get('/jembatan', function () use ($template, $db) {
     $jembatan = $db->table('proyek')->where('kategori', '\'Jembatan\'')->findAll();
 
@@ -454,7 +449,7 @@ $router->get('/jembatan/:id/delete', function ($id) use ($db) {
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/jembatan');;
 })->with('auth');
 
-/** Pengawasan */
+/** Pengawasan Section */
 $router->get('/pengawasan', function () use ($template, $db) {
     $pengawasan = $db->table('pengawasan')->join('proyek', 'proyek.id_proyek = pengawasan.id_proyek')->findAll();
 
@@ -547,7 +542,7 @@ $router->get('/pengawasan/:id_pengawasan/:id_pegawai/delete', function ($id_peng
     return Redirect::withMessage('success', 'Data berhasil dihapus')->back();;
 });
 
-/** Laporan */
+/** Laporan Section */
 $router->get('/laporan/bangunan', function () use ($template, $db) {
     $laporan = $db->table('pengawasan')->join('proyek', 'proyek.id_proyek = pengawasan.id_proyek')->where('kategori', '\'Bangunan\'')->findAll();
 
