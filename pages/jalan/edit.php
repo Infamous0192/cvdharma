@@ -25,11 +25,23 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="panjang">Panjang Jalan</label>
-                        <input type="number" value="<?= $jalan['panjang'] ?>" class="form-control" id="panjang" name="panjang" placeholder="Panjang Jalan" required />
+                        <input type="text" value="<?= $jalan['panjang'] ?>" class="form-control" id="panjang" name="panjang" placeholder="Panjang Jalan" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="lebar">Lebar Jalan</label>
-                        <input type="number" value="<?= $jalan['lebar'] ?>" class="form-control" id="lebar" name="lebar" placeholder="Lebar Jalan" required />
+                        <input type="text" value="<?= $jalan['lebar'] ?>" class="form-control" id="lebar" name="lebar" placeholder="Lebar Jalan" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tanggal_mulai">Tanggal Mulai</label>
+                        <input type="date" value="<?= $jalan['tanggal_mulai'] ?>" class="form-control" id="tanggal_mulai" name="tanggal_mulai" placeholder="Tanggal Mulai" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tanggal_selesai">Tanggal Selesai</label>
+                        <input type="date" value="<?= $jalan['tanggal_selesai'] ?>" class="form-control" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="dana">Dana</label>
+                        <input type="number" value="<?= $jalan['dana'] ?>" class="form-control" id="dana" name="dana" placeholder="Dana" required />
                     </div>
 
                     <div class="mt-1">

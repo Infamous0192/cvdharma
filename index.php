@@ -277,6 +277,9 @@ $router->post('/bangunan', function () use ($db) {
         'panjang' => $_POST['panjang'],
         'lebar' => $_POST['lebar'],
         'tinggi' => $_POST['tinggi'],
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'dana' => $_POST['dana'],
     ]);
 
     if (!$success) {
@@ -304,6 +307,9 @@ $router->post('/bangunan/:id', function ($id) use ($db) {
         'panjang' => $_POST['panjang'],
         'lebar' => $_POST['lebar'],
         'tinggi' => $_POST['tinggi'],
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'dana' => $_POST['dana'],
     ]);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/bangunan');
@@ -341,6 +347,9 @@ $router->post('/jalan', function () use ($db) {
         'panjang' => $_POST['panjang'],
         'lebar' => $_POST['lebar'],
         'tinggi' => 0,
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'dana' => $_POST['dana'],
     ]);
 
     if (!$success) {
@@ -368,6 +377,9 @@ $router->post('/jalan/:id', function ($id) use ($db) {
         'panjang' => $_POST['panjang'],
         'lebar' => $_POST['lebar'],
         'tinggi' => 0,
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'dana' => $_POST['dana'],
     ]);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/jalan');
@@ -405,6 +417,9 @@ $router->post('/jembatan', function () use ($db) {
         'panjang' => $_POST['panjang'],
         'lebar' => $_POST['lebar'],
         'tinggi' => 0,
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'dana' => $_POST['dana'],
     ]);
 
     if (!$success) {
@@ -432,6 +447,9 @@ $router->post('/jembatan/:id', function ($id) use ($db) {
         'panjang' => $_POST['panjang'],
         'lebar' => $_POST['lebar'],
         'tinggi' => 0,
+        'tanggal_mulai' => $_POST['tanggal_mulai'],
+        'tanggal_selesai' => $_POST['tanggal_selesai'],
+        'dana' => $_POST['dana'],
     ]);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/jembatan');

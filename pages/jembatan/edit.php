@@ -25,11 +25,23 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="panjang">Panjang Jembatan</label>
-                        <input type="number" value="<?= $jembatan['panjang'] ?>" class="form-control" id="panjang" name="panjang" placeholder="Panjang Jembatan" required />
+                        <input type="text" value="<?= $jembatan['panjang'] ?>" class="form-control" id="panjang" name="panjang" placeholder="Panjang Jembatan" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="lebar">Lebar Jembatan</label>
-                        <input type="number" value="<?= $jembatan['lebar'] ?>" class="form-control" id="lebar" name="lebar" placeholder="Lebar Jembatan" required />
+                        <input type="text" value="<?= $jembatan['lebar'] ?>" class="form-control" id="lebar" name="lebar" placeholder="Lebar Jembatan" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tanggal_mulai">Tanggal Mulai</label>
+                        <input type="date" value="<?= $jembatan['tanggal_mulai'] ?>" class="form-control" id="tanggal_mulai" name="tanggal_mulai" placeholder="Tanggal Mulai" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tanggal_selesai">Tanggal Selesai</label>
+                        <input type="date" value="<?= $jembatan['tanggal_selesai'] ?>" class="form-control" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="dana">Dana</label>
+                        <input type="number" value="<?= $jembatan['dana'] ?>" class="form-control" id="dana" name="dana" placeholder="Dana" required />
                     </div>
 
                     <div class="mt-1">

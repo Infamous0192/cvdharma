@@ -19,6 +19,9 @@
                     <th>Nama Jalan</th>
                     <th>Jenis</th>
                     <th>Alamat</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Dana</th>
                     <th>Panjang</th>
                     <th>Lebar</th>
                     <?php if (Session::get('level') == 'admin') : ?>
@@ -36,6 +39,9 @@
                         <td><?= $data['nama'] ?></td>
                         <td><?= $data['jenis'] ?></td>
                         <td><?= $data['alamat'] ?></td>
+                        <td><?= $data['tanggal_mulai'] ?></td>
+                        <td><?= $data['tanggal_selesai'] ?></td>
+                        <td><?= $data['dana'] ?></td>
                         <td><?= $data['panjang'] ?></td>
                         <td><?= $data['lebar'] ?></td>
                         <?php if (Session::get('level') == 'admin') : ?>
@@ -60,7 +66,7 @@
                 title: "Daftar Jalan - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
                     modifier: {
                         selected: null,
                     },
@@ -76,7 +82,7 @@
                 title: "Daftar Jalan - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
                     modifier: {
                         selected: null,
                     },

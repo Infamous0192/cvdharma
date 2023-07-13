@@ -19,6 +19,9 @@
                     <th>Nama Bangunan</th>
                     <th>Jenis</th>
                     <th>Alamat</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Dana</th>
                     <th>Panjang</th>
                     <th>Lebar</th>
                     <th>Tinggi</th>
@@ -37,6 +40,9 @@
                         <td><?= $data['nama'] ?></td>
                         <td><?= $data['jenis'] ?></td>
                         <td><?= $data['alamat'] ?></td>
+                        <td><?= $data['tanggal_mulai'] ?></td>
+                        <td><?= $data['tanggal_selesai'] ?></td>
+                        <td><?= $data['dana'] ?></td>
                         <td><?= $data['panjang'] ?></td>
                         <td><?= $data['lebar'] ?></td>
                         <td><?= $data['tinggi'] ?></td>
