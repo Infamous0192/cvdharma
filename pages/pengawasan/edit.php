@@ -11,7 +11,7 @@
                 <h5 class="mb-0">Edit Pengawasan</h5>
             </div>
             <div class="card-body">
-                <form action="<?= Router::baseUrl('pengawasan/' . $pengawasan['id_pengawasan']) ?>" method="post">
+                <form action="<?= Router::baseUrl('pengawasan/' . $pengawasan['id_pengawasan']) ?>" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label" for="id_proyek">Project</label>
                         <select id="id_proyek" name="id_proyek" class="form-select" required>
@@ -24,23 +24,39 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="tgl_mulai">Tanggal Mulai</label>
-                        <input id="tgl_mulai" value="<?= $pengawasan['tgl_mulai'] ?>" name="tgl_mulai" class="form-control" type="date" id="html5-date-input" required>
+                        <label class="form-label" for="periode">Periode</label>
+                        <input type="text" value="<?= $pengawasan['periode'] ?>" id="periode" name="periode" class="form-control" placeholder="Periode" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="tgl_selesai">Tanggal Selesai</label>
-                        <input id="tgl_selesai" name="tgl_selesai" value="<?= $pengawasan['tgl_selesai'] ?>" class="form-control" type="date" id="html5-date-input" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="kemajuan">Kemajuan</label>
-                        <input type="text" id="kemajuan" name="kemajuan" value="<?= $pengawasan['kemajuan'] ?>" class="form-control" placeholder="Kemajuan" required>
+                        <label class="form-label" for="tahun">Tahun</label>
+                        <input type="text" value="<?= $pengawasan['tahun'] ?>" id="tahun" name="tahun" class="form-control" placeholder="Tahun" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="keterangan">Keterangan</label>
-                        <input type="text" id="keterangan" name="keterangan" value="<?= $pengawasan['keterangan'] ?>" class="form-control" placeholder="Keterangan" required>
+                        <input type="text" value="<?= $pengawasan['keterangan'] ?>" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="kemajuan">Kemajuan</label>
+                        <input type="text" value="<?= $pengawasan['kemajuan'] ?>" id="kemajuan" name="kemajuan" class="form-control" placeholder="Kemajuan" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="biaya">Biaya Pengeluaran</label>
+                        <input type="text" value="<?= $pengawasan['biaya'] ?>" id="biaya" name="biaya" class="form-control" placeholder="Biaya Pengeluaran" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="foto">Foto</label>
+                        <input type="file" id="foto" name="foto" class="form-control" placeholder="Foto">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="video">Video</label>
+                        <input type="text" value="<?= $pengawasan['video'] ?>" id="video" name="video" class="form-control" placeholder="Video" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="kwitansi">Kwitansi</label>
+                        <input type="file" id="kwitansi" name="kwitansi" class="form-control" placeholder="Kwitansi">
                     </div>
 
-                    <div class="mt-1">
+                    <div class="mt-4">
                         <button type="submit" name="Submit" class="btn btn-primary">Simpan</button>
                         <a href="<?= Router::baseUrl('pengawasan') ?>">
                             <button type="button" class="btn btn-warning">Kembali</button>

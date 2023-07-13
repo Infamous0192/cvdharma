@@ -481,11 +481,25 @@ $router->get('/pengawasan/add', function () use ($template, $db) {
 })->with('admin');
 
 $router->post('/pengawasan', function () use ($db) {
+    $foto = FileUpload::upload('foto');
+    if (!$foto) {
+        return Redirect::withMessage('error', 'Gagal mengupload foto')->back();
+    }
+
+    $kwitansi = FileUpload::upload('kwitansi');
+    if (!$kwitansi) {
+        return Redirect::withMessage('error', 'Gagal mengupload kwitansi')->back();
+    }
+
     $success = $db->table('pengawasan')->insert([
-        'tgl_mulai' => $_POST['tgl_mulai'],
-        'tgl_selesai' => $_POST['tgl_selesai'],
         'kemajuan' => $_POST['kemajuan'],
+        'periode' => $_POST['periode'],
         'keterangan' => $_POST['keterangan'],
+        'tahun' => $_POST['tahun'],
+        'video' => $_POST['video'],
+        'biaya' => $_POST['biaya'],
+        'foto' => $foto['name'],
+        'kwitansi' => $kwitansi['name'],
         'id_proyek' => $_POST['id_proyek'],
     ]);
 
@@ -507,13 +521,35 @@ $router->get('/pengawasan/:id', function ($id) use ($template, $db) {
 })->with('admin');
 
 $router->post('/pengawasan/:id', function ($id) use ($db) {
-    $success = $db->table('pengawasan')->where('id_pengawasan', $id)->update([
-        'tgl_mulai' => $_POST['tgl_mulai'],
-        'tgl_selesai' => $_POST['tgl_selesai'],
+    $data = [
         'kemajuan' => $_POST['kemajuan'],
+        'periode' => $_POST['periode'],
         'keterangan' => $_POST['keterangan'],
+        'tahun' => $_POST['tahun'],
+        'video' => $_POST['video'],
+        'biaya' => $_POST['biaya'],
         'id_proyek' => $_POST['id_proyek'],
-    ]);
+    ];
+
+    if ($_FILES['foto']['error'] == 0) {
+        $foto = FileUpload::upload('foto');
+        if (!$foto) {
+            return Redirect::withMessage('error', 'Gagal mengupload foto')->back();
+        }
+
+        $data['foto'] = $foto['name'];
+    }
+
+    if ($_FILES['kwitansi']['error'] == 0) {
+        $kwitansi = FileUpload::upload('kwitansi');
+        if (!$kwitansi) {
+            return Redirect::withMessage('error', 'Gagal mengupload kwitansi')->back();
+        }
+
+        $data['kwitansi'] = $kwitansi['name'];
+    }
+
+    $success = $db->table('pengawasan')->where('id_pengawasan', $id)->update($data);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/pengawasan');
     }

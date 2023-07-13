@@ -16,13 +16,17 @@
             <thead>
                 <tr>
                     <th>No. </th>
-                    <th>Nama Project</th>
-                    <th>Tgl. Mulai</th>
-                    <th>Tgl. Selesai</th>
-                    <th>Kemajuan</th>
-                    <th>Jenis Project</th>
-                    <th>Keterangan</th>
                     <th>Aksi</th>
+                    <th>Nama Proyek</th>
+                    <th>Jenis Proyek</th>
+                    <th>Periode</th>
+                    <th>Tahun</th>
+                    <th>Keterangan</th>
+                    <th>Kemajuan</th>
+                    <th>Biaya Pengeluaran</th>
+                    <th>Foto</th>
+                    <th>Video</th>
+                    <th>Kwitansi</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -32,16 +36,44 @@
                         <td>
                             <strong><?= $i++ ?></strong>
                         </td>
-                        <td><?= $data['nama'] ?></td>
-                        <td><?= $data['tgl_mulai'] ?></td>
-                        <td><?= $data['tgl_selesai'] ?></td>
-                        <td><?= $data['kemajuan'] ?></td>
-                        <td><?= $data['kategori'] ?></td>
-                        <td><?= $data['keterangan'] ?></td>
                         <td>
                             <a href="<?= Router::baseUrl('pengawasan/' . $data['id_pengawasan']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
                             <a href="<?= Router::baseUrl('pengawasan/' . $data['id_pengawasan']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
                             <a href="<?= Router::baseUrl('pengawasan/' . $data['id_pengawasan']) . '/project'  ?>" style="text-decoration:none;" class="btn btn-icon btn-primary"><span class="tf-icons bx bx-user"></a>
+                        </td>
+                        <td><?= $data['nama'] ?></td>
+                        <td><?= $data['kategori'] ?></td>
+                        <td><?= $data['periode'] ?></td>
+                        <td><?= $data['tahun'] ?></td>
+                        <td><?= $data['keterangan'] ?></td>
+                        <td><?= $data['kemajuan'] ?></td>
+                        <td><?= $data['biaya'] ?></td>
+                        <td>
+                            <?php if ($data['foto']) : ?>
+                                <a href="<?= Router::baseUrl('uploads/' . $data['foto']) ?>" target="_blank">
+                                    Lihat Foto
+                                </a>
+                            <?php else : ?>
+                                -
+                            <?php endif ?>
+                        </td>
+                        <td>
+                            <?php if ($data['video']) : ?>
+                                <a href="<?= $data['video'] ?>" target="_blank">
+                                    Lihat Video
+                                </a>
+                            <?php else : ?>
+                                -
+                            <?php endif ?>
+                        </td>
+                        <td>
+                            <?php if ($data['kwitansi']) : ?>
+                                <a href="<?= Router::baseUrl('uploads/' . $data['kwitansi']) ?>" target="_blank">
+                                    Lihat Kwitansi
+                                </a>
+                            <?php else : ?>
+                                -
+                            <?php endif ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
