@@ -470,8 +470,10 @@ $router->get('/jembatan/:id/delete', function ($id) use ($db) {
 /** Pengawasan Section */
 $router->get('/pengawasan', function () use ($template, $db) {
     $pengawasan = $db->table('pengawasan')->join('proyek', 'proyek.id_proyek = pengawasan.id_proyek')->findAll();
+    $periode = $db->table('pengawasan')->select('periode')->groupBy('periode')->column('periode');
+    $tahun = $db->table('pengawasan')->select('tahun')->groupBy('tahun')->column('tahun');
 
-    return $template->withLayout('dashboard')->render('pengawasan/index', compact('pengawasan'));
+    return $template->withLayout('dashboard')->render('pengawasan/index', compact('pengawasan', 'periode', 'tahun'));
 })->with('auth');
 
 $router->get('/pengawasan/add', function () use ($template, $db) {

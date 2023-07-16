@@ -11,6 +11,7 @@ class Database
     private $select;
     private $where;
     private $join;
+    private $groupBy;
 
     public function __construct($host, $username, $password, $database)
     {
@@ -41,6 +42,7 @@ class Database
         $this->where = [];
         $this->join = [];
         $this->select = [];
+        $this->groupBy = [];
         $this->table = $table;
         return $this;
     }
@@ -72,6 +74,12 @@ class Database
     public function join($table, $condition)
     {
         $this->join[] = "JOIN $table ON $condition";
+        return $this;
+    }
+
+    public function groupBy($column)
+    {
+        $this->groupBy[] = $column;
         return $this;
     }
 
@@ -149,11 +157,28 @@ class Database
             $query .= " WHERE " . implode(" AND ", $this->where);
         }
 
+        if (!empty($this->groupBy)) {
+            $query .= " GROUP BY " . implode(", ", $this->groupBy);
+        }
+
         $result = mysqli_query($this->connection, $query);
         if (!$result) {
             return null;
         }
 
         return $result;
+    }
+
+    public function column($column)
+    {
+        $this->select = $column;
+        $result = $this->exec();
+
+        $values = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $values[] = $row[$column];
+        }
+
+        return $values;
     }
 }

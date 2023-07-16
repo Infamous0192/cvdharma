@@ -1,62 +1,96 @@
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 14 Jul 2023 pada 09.49
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 7.3.33
 
-CREATE TABLE IF NOT EXISTS `gaji` (
-  `id_gaji` int(5) NOT NULL AUTO_INCREMENT,
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `cvdcp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `gaji`
+--
+
+CREATE TABLE `gaji` (
+  `id_gaji` int(5) NOT NULL,
   `gaji` int(12) NOT NULL,
   `gaji_bersih` int(12) NOT NULL,
-  `potongan` int(12) NOT NULL,
-  PRIMARY KEY (`id_gaji`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `potongan` int(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*!40000 ALTER TABLE `gaji` DISABLE KEYS */;
+--
+-- Dumping data untuk tabel `gaji`
+--
+
 INSERT INTO `gaji` (`id_gaji`, `gaji`, `gaji_bersih`, `potongan`) VALUES
-	(2, 20000, 15000, 5000),
-	(3, 15000, 10000, 5000),
-	(4, 10000, 8000, 2000),
-	(5, 5000, 3500, 1500),
-	(7, 4000, 4000, 500);
-/*!40000 ALTER TABLE `gaji` ENABLE KEYS */;
+(2, 20000, 15000, 5000),
+(3, 15000, 10000, 5000),
+(4, 10000, 8000, 2000),
+(5, 5000, 3500, 1500),
+(7, 4000, 4000, 500);
 
-CREATE TABLE IF NOT EXISTS `jabatan` (
-  `id_jabatan` int(5) NOT NULL AUTO_INCREMENT,
-  `nama_jabatan` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_jabatan`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+-- --------------------------------------------------------
 
-/*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
+--
+-- Struktur dari tabel `jabatan`
+--
+
+CREATE TABLE `jabatan` (
+  `id_jabatan` int(5) NOT NULL,
+  `nama_jabatan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `jabatan`
+--
+
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
-	(1, 'Direktur'),
-	(5, 'Insinyur'),
-	(7, 'Designer'),
-	(9, 'Arsitek'),
-	(12, 'Pegawai'),
-	(13, 'Office Boy');
-/*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
+(1, 'Direktur'),
+(5, 'Insinyur'),
+(7, 'Designer'),
+(9, 'Arsitek'),
+(12, 'Pegawai'),
+(13, 'Office Boy');
 
-CREATE TABLE IF NOT EXISTS `kontraktor` (
-  `id_kontraktor` int(5) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kontraktor`
+--
+
+CREATE TABLE `kontraktor` (
+  `id_kontraktor` int(5) NOT NULL,
   `nama_kontraktor` varchar(50) NOT NULL,
   `tanggal_mulai` date NOT NULL,
   `tanggal_selesai` date NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT '',
-  `id_proyek` int(5) DEFAULT NULL,
-  PRIMARY KEY (`id_kontraktor`),
-  KEY `id_proyek` (`id_proyek`),
-  CONSTRAINT `FK__proyek` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `id_proyek` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*!40000 ALTER TABLE `kontraktor` DISABLE KEYS */;
-INSERT INTO `kontraktor` (`id_kontraktor`, `nama_kontraktor`, `tanggal_mulai`, `tanggal_selesai`, `status`, `id_proyek`) VALUES
-	(2, 'Laboriosam earum ut', '2004-03-04', '2017-11-09', 'Baru dibangun', 13);
-/*!40000 ALTER TABLE `kontraktor` ENABLE KEYS */;
+-- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `pegawai` (
-  `id_pegawai` int(5) NOT NULL AUTO_INCREMENT,
+--
+-- Struktur dari tabel `pegawai`
+--
+
+CREATE TABLE `pegawai` (
+  `id_pegawai` int(5) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `jenis_kelamin` enum('Pria','Wanita') NOT NULL,
   `agama` enum('Islam','Protestan','Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
@@ -65,101 +99,97 @@ CREATE TABLE IF NOT EXISTS `pegawai` (
   `email` varchar(100) NOT NULL,
   `id_jabatan` int(5) DEFAULT NULL,
   `id_gaji` int(5) DEFAULT NULL,
-  `id_user` int(5) DEFAULT NULL,
-  PRIMARY KEY (`id_pegawai`),
-  KEY `FK_pegawai_jabatan` (`id_jabatan`),
-  KEY `FK_pegawai_gaji` (`id_gaji`),
-  KEY `FK_pegawai_pengguna` (`id_user`),
-  CONSTRAINT `FK_pegawai_gaji` FOREIGN KEY (`id_gaji`) REFERENCES `gaji` (`id_gaji`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_pegawai_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `FK_pegawai_pengguna` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  `id_user` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*!40000 ALTER TABLE `pegawai` DISABLE KEYS */;
+--
+-- Dumping data untuk tabel `pegawai`
+--
+
 INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jenis_kelamin`, `agama`, `alamat`, `no_telp`, `email`, `id_jabatan`, `id_gaji`, `id_user`) VALUES
-	(2, 'Ahmad Ridhoni', 'Pria', 'Islam', 'jalan pekauman', '0812528271', 'doni23@gmail.com', 9, 3, 4),
-	(5, 'Taufik Fadil', 'Pria', 'Islam', 'Jalan Ramin', '08125342716', 'fadhil@email.com', 5, 3, 4),
-	(7, 'M Anshari', 'Pria', 'Islam', 'Darma Praja', '081243217967', 'anshari@gmail.com', 1, 2, 3),
-	(8, 'Diwantara Irwan Putra', 'Pria', 'Islam', 'citra land', '08123291837', 'taraputra@gmail.com', 7, 3, 4),
-	(9, 'Muhammad Gema Andika', 'Pria', 'Islam', 'Citra Land', '081274520393', 'gemagte@gmail.com', 7, 3, 4),
-	(10, 'Alip M Sevri', 'Pria', 'Islam', 'Komplek Mitramas Pramuka', '081273516987', 'alipman@gmail.com', 9, 3, 4),
-	(11, 'usup', 'Pria', 'Islam', 'jalan ramin', '08128428461', 'usopp31@gmail.com', 13, 5, 4),
-	(12, 'Afi ', 'Pria', 'Islam', 'Japos', '085235173969', 'afiman@gmail.com', 12, 5, 4),
-	(13, 'Michael Soemanto', 'Pria', 'Protestan', 'Darma Praja', '081346713198', 'msoemanto@gmail.com', 5, 3, 4);
-/*!40000 ALTER TABLE `pegawai` ENABLE KEYS */;
+(2, 'Ahmad Ridhoni', 'Pria', 'Islam', 'jalan pekauman', '0812528271', 'doni23@gmail.com', 9, 3, 4),
+(5, 'Taufik Fadil', 'Pria', 'Islam', 'Jalan Ramin', '08125342716', 'fadhil@email.com', 5, 3, 4),
+(7, 'M Anshari', 'Pria', 'Islam', 'Darma Praja', '081243217967', 'anshari@gmail.com', 1, 2, 3),
+(8, 'Diwantara Irwan Putra', 'Pria', 'Islam', 'citra land', '08123291837', 'taraputra@gmail.com', 7, 3, 4),
+(9, 'Muhammad Gema Andika', 'Pria', 'Islam', 'Citra Land', '081274520393', 'gemagte@gmail.com', 7, 3, 4),
+(10, 'Alip M Sevri', 'Pria', 'Islam', 'Komplek Mitramas Pramuka', '081273516987', 'alipman@gmail.com', 9, 3, 4),
+(11, 'usup', 'Pria', 'Islam', 'jalan ramin', '08128428461', 'usopp31@gmail.com', 13, 5, 4),
+(12, 'Afi ', 'Pria', 'Islam', 'Japos', '085235173969', 'afiman@gmail.com', 12, 5, 4),
+(13, 'Michael Soemanto', 'Pria', 'Protestan', 'Darma Praja', '081346713198', 'msoemanto@gmail.com', 5, 3, 4);
 
-CREATE TABLE IF NOT EXISTS `pengawasan` (
-  `id_pengawasan` int(5) NOT NULL AUTO_INCREMENT,
-  `kemajuan` text,
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengawasan`
+--
+
+CREATE TABLE `pengawasan` (
+  `id_pengawasan` int(5) NOT NULL,
+  `kemajuan` text DEFAULT NULL,
   `periode` varchar(50) DEFAULT NULL,
-  `keterangan` text,
+  `keterangan` text DEFAULT NULL,
   `tahun` varchar(50) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
   `video` varchar(100) DEFAULT NULL,
   `kwitansi` varchar(50) DEFAULT NULL,
   `biaya` varchar(50) DEFAULT NULL,
-  `id_proyek` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_pengawasan`),
-  KEY `FK_pengawasan_proyek` (`id_proyek`),
-  CONSTRAINT `FK_pengawasan_proyek` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
-
-/*!40000 ALTER TABLE `pengawasan` DISABLE KEYS */;
-INSERT INTO `pengawasan` (`id_pengawasan`, `kemajuan`, `periode`, `keterangan`, `tahun`, `foto`, `video`, `kwitansi`, `biaya`, `id_proyek`) VALUES
-	(2, '95%', NULL, 'Hampir selesai', NULL, NULL, NULL, NULL, NULL, 10),
-	(3, '75%', NULL, 'Hampir selesai', NULL, NULL, NULL, NULL, NULL, 11),
-	(4, '100%', NULL, 'proyek sudah selesai', NULL, NULL, NULL, NULL, NULL, 12),
-	(5, '100%', NULL, 'proyek sudah selesai', NULL, NULL, NULL, NULL, NULL, 13),
-	(6, '90%', NULL, 'berlanjut', NULL, NULL, NULL, NULL, NULL, 14),
-	(7, '100%', NULL, 'proyek selesai kurang dari 1 tahun', NULL, NULL, NULL, NULL, NULL, 15),
-	(8, '100%', NULL, 'selesai dalam waktu 6 tahun', NULL, NULL, NULL, NULL, NULL, 16),
-	(9, '100%', NULL, 'proyek sudah selesai', NULL, NULL, NULL, NULL, NULL, 17),
-	(10, '100%', NULL, 'Renovasi berupa tambahan bangunan dan juga sedikit perbaikan ', NULL, NULL, NULL, NULL, NULL, 18),
-	(12, '100%', NULL, 'Renovasi Jalan karena rusak bekas Banjir ', NULL, NULL, NULL, NULL, NULL, 20),
-	(16, 'Inventore odit paria', NULL, 'Nulla quasi et itaqu', NULL, NULL, NULL, NULL, NULL, 20),
-	(17, '100%', NULL, 'proyek sudah selesai', NULL, NULL, NULL, NULL, NULL, 21);
-/*!40000 ALTER TABLE `pengawasan` ENABLE KEYS */;
-
-CREATE TABLE IF NOT EXISTS `pengawasan_pegawai` (
-  `id_pengawasan` int(5) NOT NULL,
-  `id_pegawai` int(5) NOT NULL,
-  `role` enum('Owner','Pegawai','Pengawas') NOT NULL,
-  KEY `id_pegawai` (`id_pegawai`),
-  KEY `id_pengawasan` (`id_pengawasan`),
-  CONSTRAINT `pengawasan_pegawai_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `pengawasan_pegawai_ibfk_2` FOREIGN KEY (`id_pengawasan`) REFERENCES `pengawasan` (`id_pengawasan`) ON DELETE CASCADE ON UPDATE CASCADE
+  `id_proyek` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*!40000 ALTER TABLE `pengawasan_pegawai` DISABLE KEYS */;
-INSERT INTO `pengawasan_pegawai` (`id_pengawasan`, `id_pegawai`, `role`) VALUES
-	(16, 11, 'Owner'),
-	(16, 9, 'Owner'),
-	(16, 5, 'Owner'),
-	(2, 2, 'Owner'),
-	(2, 5, 'Owner'),
-	(2, 8, 'Owner'),
-	(2, 9, 'Pengawas');
-/*!40000 ALTER TABLE `pengawasan_pegawai` ENABLE KEYS */;
+--
+-- Dumping data untuk tabel `pengawasan`
+--
 
-CREATE TABLE IF NOT EXISTS `pengguna` (
-  `id_user` int(5) NOT NULL AUTO_INCREMENT,
+INSERT INTO `pengawasan` (`id_pengawasan`, `kemajuan`, `periode`, `keterangan`, `tahun`, `foto`, `video`, `kwitansi`, `biaya`, `id_proyek`) VALUES
+(3, '25%', 'periode pembangunan pertama', 'membuat struktur awal bangunan dan kerangka bangunan', '2022', '64b0ca6c17ed6.jpg', 'https://drive.google.com/file/d/1ETOl3HGmqCJGOzaiSxegS0HRMeNjMDxe/view?usp=drive_link', '64b0ca12d7bff.docx', '10 juta', 11),
+(19, '50%', 'periode pembangunan kedua', 'membuat dinding tembok semen dan pengerasan tanah', '2022', '64b0cad05372a.jpg', 'https://drive.google.com/file/d/1XKwmw4CFXkmjmgc2vmPECGor23etRz2c/view?usp=drive_link', '64b0cad0539b8.docx', '25 juta', 11),
+(20, '70%', 'periode pembangunan ketiga', 'menguatkan struktur bangunan dan instalasi kelistrikan', '2022', '64b0dbea822f8.png', 'https://drive.google.com/file/d/1DuT1jWUkJkvZkJoVN-iTUkEpoqYAnPVG/view?usp=drive_link', '64b0dbea8263a.docx', '15 juta', 11),
+(21, '25%', 'periode pembangunan pertama', 'penggalian dan pengecoran awal', '2022', '64b0e073c03ee.jpg', 'https://drive.google.com/file/d/1zD_WkSWZmCXTlVmP3FDvFOiDmrQAworG/view?usp=drive_link', '64b0e073c05f2.docx', '30 juta', 14),
+(22, '25%', 'periode pembangunan pertama', 'pengerasan beton pertama', '2022', '64b0e0f8b1b43.jpg', 'https://drive.google.com/file/d/1X_hEsdkEKt6V5OtT1AFU2ETy6dhBQELy/view?usp=drive_link', '64b0e0f8b1cee.docx', '15 juta', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengawasan_pegawai`
+--
+
+CREATE TABLE `pengawasan_pegawai` (
+  `id_pengawasan` int(5) NOT NULL,
+  `id_pegawai` int(5) NOT NULL,
+  `role` enum('Owner','Pegawai','Pengawas') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengguna`
+--
+
+CREATE TABLE `pengguna` (
+  `id_user` int(5) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `level` enum('admin','pegawai') NOT NULL,
-  PRIMARY KEY (`id_user`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `level` enum('admin','pegawai') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*!40000 ALTER TABLE `pengguna` DISABLE KEYS */;
+--
+-- Dumping data untuk tabel `pengguna`
+--
+
 INSERT INTO `pengguna` (`id_user`, `username`, `password`, `level`) VALUES
-	(1, 'user1', 'test1', 'pegawai'),
-	(3, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
-	(4, 'pegawai', '047aeeb234644b9e2d4138ed3bc7976a', 'pegawai'),
-	(5, 'vero', 'cc491de401e5dbcde41ef91090975f42', 'admin');
-/*!40000 ALTER TABLE `pengguna` ENABLE KEYS */;
+(1, 'user1', 'test1', 'pegawai'),
+(3, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
+(4, 'pegawai', '047aeeb234644b9e2d4138ed3bc7976a', 'pegawai'),
+(5, 'vero', 'cc491de401e5dbcde41ef91090975f42', 'admin');
 
-CREATE TABLE IF NOT EXISTS `proyek` (
-  `id_proyek` int(5) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `proyek`
+--
+
+CREATE TABLE `proyek` (
+  `id_proyek` int(5) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `jenis` varchar(50) DEFAULT NULL,
   `kategori` enum('Bangunan','Jalan','Jembatan') DEFAULT NULL,
@@ -169,28 +199,159 @@ CREATE TABLE IF NOT EXISTS `proyek` (
   `tinggi` varchar(50) DEFAULT NULL,
   `tanggal_mulai` date DEFAULT NULL,
   `tanggal_selesai` date DEFAULT NULL,
-  `dana` bigint(50) DEFAULT NULL,
-  PRIMARY KEY (`id_proyek`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+  `dana` bigint(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*!40000 ALTER TABLE `proyek` DISABLE KEYS */;
+--
+-- Dumping data untuk tabel `proyek`
+--
+
 INSERT INTO `proyek` (`id_proyek`, `nama`, `jenis`, `kategori`, `alamat`, `panjang`, `lebar`, `tinggi`, `tanggal_mulai`, `tanggal_selesai`, `dana`) VALUES
-	(10, 'Jembatan Japos', 'jembatan kecil', 'Jembatan', 'japos', '12', '12', '0', NULL, NULL, NULL),
-	(11, 'Kantor PT sukses integritas perkasa', 'Bangunan Besar', 'Bangunan', 'Banjarmasin', '20', '15', '10', NULL, NULL, NULL),
-	(12, 'Jalan Banjar Indah Baru', 'Jalan Kecil Komplek', 'Jalan', 'Banjar Indah permai', '2', '20', '0', NULL, NULL, NULL),
-	(13, 'Ruko ', 'Bangunan Kecil swasta', 'Bangunan', 'Jalan Gatot', '7', '10', '5', NULL, NULL, NULL),
-	(14, 'Jembatan Flyover', 'Jembatan Flyover Besar', 'Jembatan', 'jalan A.Yani', '20', '20', '0', NULL, NULL, NULL),
-	(15, 'Jalan Citra Land', 'Jalan Kecil Komplek', 'Jalan', 'Citra Land', '2', '30', '0', NULL, NULL, NULL),
-	(16, 'Apartemen Gunawangsa', 'Gedung Apartemen', 'Bangunan', 'sukolilo jawa timur', '30', '30', '50', NULL, NULL, NULL),
-	(17, 'Kantor Baru PT Bina Cipta Dasalindo', 'Bangunan Kecil swasta', 'Bangunan', 'Jalan Banjar Indah', '7', '5', '5', NULL, NULL, NULL),
-	(18, 'Rumah Sakit Ciputra', 'Rumah Sakit', 'Bangunan', 'Citra Land', '50', '50', '20', NULL, NULL, NULL),
-	(19, 'Jembatan Banjar Indah', 'jembatan kecil', 'Jembatan', 'Banjar Indah', '15', '8', '0', NULL, NULL, NULL),
-	(20, 'Jalan A.Yani', 'Jalan Besar', 'Jalan', 'Jalan A.Yani', '10', '50', '0', NULL, NULL, NULL),
-	(21, 'Masjid Raya', 'Tempat Ibadah', 'Bangunan', 'Banjarmasin', '30', '20', '5', NULL, NULL, NULL),
-	(23, 'Aut porro libero eiu', 'Impedit adipisicing', 'Bangunan', 'Error dolorem elit ', 'Veniam pariatur Ods', 'Velit fugiat repreh', 'Dolorum dolore conse', '2015-11-18', '2016-09-04', 87);
-/*!40000 ALTER TABLE `proyek` ENABLE KEYS */;
+(11, 'Kantor cv dharma baru', 'Bangunan Rumahan', 'Bangunan', 'Banjarmasin', '20 meter', '15 meter', '10 meter', '2021-07-16', '2022-06-21', 350000000),
+(12, 'Jalan Banjar Indah Baru', 'Jalan Kecil Komplek', 'Jalan', 'Banjar Indah permai', '2 km', '20 meter', '0', '2022-07-01', '2023-03-03', 50000000),
+(14, 'Jembatan Flyover', 'Jembatan Flyover Besar', 'Jembatan', 'jalan A.Yani', '200 meter', '50 meter', '0', '2022-09-07', '2023-09-15', 700000000),
+(17, 'Kantor Baru PT Bina Cipta Dasalindo', 'Bangunan Kecil swasta', 'Bangunan', 'Jalan Banjar Indah', '15 meter', '10 meter', '5 meter', '2022-05-09', '2023-02-09', 200000000),
+(18, 'Rumah Sakit Ciputra', 'Rumah Sakit', 'Bangunan', 'Citra Land', '50 meter', '50 meter', '20 meter', '2022-01-09', '2023-06-21', 1000000000),
+(19, 'Jembatan Banjar Indah', 'jembatan kecil', 'Jembatan', 'Banjar Indah', '40 meter', '10 meter', '0', '2022-12-01', '2023-07-07', 60000000),
+(20, 'Jalan A.Yani', 'Jalan Besar', 'Jalan', 'Jalan A.Yani', '10 km', '50 meter', '0', '2022-06-14', '2023-06-14', 200000000);
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `gaji`
+--
+ALTER TABLE `gaji`
+  ADD PRIMARY KEY (`id_gaji`);
+
+--
+-- Indeks untuk tabel `jabatan`
+--
+ALTER TABLE `jabatan`
+  ADD PRIMARY KEY (`id_jabatan`);
+
+--
+-- Indeks untuk tabel `kontraktor`
+--
+ALTER TABLE `kontraktor`
+  ADD PRIMARY KEY (`id_kontraktor`),
+  ADD KEY `id_proyek` (`id_proyek`);
+
+--
+-- Indeks untuk tabel `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD PRIMARY KEY (`id_pegawai`),
+  ADD KEY `FK_pegawai_jabatan` (`id_jabatan`),
+  ADD KEY `FK_pegawai_gaji` (`id_gaji`),
+  ADD KEY `FK_pegawai_pengguna` (`id_user`);
+
+--
+-- Indeks untuk tabel `pengawasan`
+--
+ALTER TABLE `pengawasan`
+  ADD PRIMARY KEY (`id_pengawasan`),
+  ADD KEY `FK_pengawasan_proyek` (`id_proyek`);
+
+--
+-- Indeks untuk tabel `pengawasan_pegawai`
+--
+ALTER TABLE `pengawasan_pegawai`
+  ADD KEY `id_pegawai` (`id_pegawai`),
+  ADD KEY `id_pengawasan` (`id_pengawasan`);
+
+--
+-- Indeks untuk tabel `pengguna`
+--
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indeks untuk tabel `proyek`
+--
+ALTER TABLE `proyek`
+  ADD PRIMARY KEY (`id_proyek`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `gaji`
+--
+ALTER TABLE `gaji`
+  MODIFY `id_gaji` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `jabatan`
+--
+ALTER TABLE `jabatan`
+  MODIFY `id_jabatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT untuk tabel `kontraktor`
+--
+ALTER TABLE `kontraktor`
+  MODIFY `id_kontraktor` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `pegawai`
+--
+ALTER TABLE `pegawai`
+  MODIFY `id_pegawai` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengawasan`
+--
+ALTER TABLE `pengawasan`
+  MODIFY `id_pengawasan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengguna`
+--
+ALTER TABLE `pengguna`
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `proyek`
+--
+ALTER TABLE `proyek`
+  MODIFY `id_proyek` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `kontraktor`
+--
+ALTER TABLE `kontraktor`
+  ADD CONSTRAINT `FK__proyek` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD CONSTRAINT `FK_pegawai_gaji` FOREIGN KEY (`id_gaji`) REFERENCES `gaji` (`id_gaji`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_pegawai_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_pegawai_pengguna` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pengawasan`
+--
+ALTER TABLE `pengawasan`
+  ADD CONSTRAINT `FK_pengawasan_proyek` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pengawasan_pegawai`
+--
+ALTER TABLE `pengawasan_pegawai`
+  ADD CONSTRAINT `pengawasan_pegawai_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pengawasan_pegawai_ibfk_2` FOREIGN KEY (`id_pengawasan`) REFERENCES `pengawasan` (`id_pengawasan`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
