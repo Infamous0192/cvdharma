@@ -34,6 +34,16 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <div class="col-md-3">
+                    <select name="" id="proyek-filter" class="form-control">
+                        <option value="">Pilih Proyek</option>
+                        <?php foreach ($proyek as $data) : ?>
+                            <option value="<?= $data ?>">
+                                <?= $data ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
             <table id="table1" class="table table-striped">
                 <thead>
@@ -157,6 +167,15 @@
 
         table1
             .columns(4)
+            .search(filterValue)
+            .draw();
+    });
+
+    $('#proyek-filter').on('change', function() {
+        var filterValue = $(this).val();
+
+        table1
+            .columns(2)
             .search(filterValue)
             .draw();
     });
