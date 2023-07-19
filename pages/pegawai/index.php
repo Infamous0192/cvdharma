@@ -66,7 +66,7 @@
                 title: "Daftar Pegawai - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                     modifier: {
                         selected: null,
                     },
@@ -82,7 +82,7 @@
                 title: "Daftar Pegawai - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                     modifier: {
                         selected: null,
                     },

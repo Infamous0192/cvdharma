@@ -64,7 +64,7 @@
                 title: "Daftar Gaji - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1, 2, 3],
+                    columns: [0, 1, 2, 3, 4],
                     modifier: {
                         selected: null,
                     },
@@ -80,7 +80,7 @@
                 title: "Daftar Gaji - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1, 2, 3],
+                    columns: [0, 1, 2, 3, 4],
                     modifier: {
                         selected: null,
                     },
