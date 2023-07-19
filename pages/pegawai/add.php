@@ -75,6 +75,10 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="tanggal_kontrak">Tanggal Akhir Kontrak</label>
+                        <input type="date" class="form-control" id="tanggal_kontrak" name="tanggal_kontrak" placeholder="Masukan Tanggal Akhir Kontrak" required />
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="id_proyek">Project</label>
                         <select id="id_proyek" name="id_proyek" class="form-select" required>
                             <option value="">Pilih Project</option>

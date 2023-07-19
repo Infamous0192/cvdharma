@@ -184,7 +184,7 @@ $router->get('/gaji/:id/delete', function ($id) use ($db) {
 /** Pegawai Section */
 $router->get('/pegawai', function () use ($template, $db) {
     $pegawai = $db->table('pegawai')
-        ->select('pegawai.id_pegawai, pegawai.nama, pegawai.nik, pegawai.jenis_kelamin, pegawai.agama, pegawai.no_telp, proyek.nama as nama_proyek, gaji.gaji, jabatan.nama_jabatan')
+        ->select('pegawai.id_pegawai, pegawai.tanggal_kontrak, pegawai.nama, pegawai.nik, pegawai.jenis_kelamin, pegawai.agama, pegawai.no_telp, proyek.nama as nama_proyek, gaji.gaji, jabatan.nama_jabatan')
         ->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
         ->join('gaji', 'pegawai.id_gaji = gaji.id_gaji')
         ->join('pengguna', 'pegawai.id_user = pengguna.id_user', 'left')
@@ -211,6 +211,7 @@ $router->post('/pegawai', function () use ($db) {
         'alamat' => $_POST['alamat'],
         'no_telp' => $_POST['no_telp'],
         'email' => $_POST['email'],
+        'tanggal_kontrak' => $_POST['tanggal_kontrak'],
         'id_jabatan' => $_POST['id_jabatan'],
         'id_gaji' => $_POST['id_gaji'],
         'id_proyek' => $_POST['id_proyek'],
@@ -245,6 +246,7 @@ $router->post('/pegawai/:id', function ($id) use ($db) {
         'alamat' => $_POST['alamat'],
         'no_telp' => $_POST['no_telp'],
         'email' => $_POST['email'],
+        'tanggal_kontrak' => $_POST['tanggal_kontrak'],
         'id_jabatan' => $_POST['id_jabatan'],
         'id_gaji' => $_POST['id_gaji'],
         'id_proyek' => $_POST['id_proyek'],
