@@ -71,9 +71,9 @@ class Database
         return $this;
     }
 
-    public function join($table, $condition)
+    public function join($table, $condition, $type = 'inner')
     {
-        $this->join[] = "JOIN $table ON $condition";
+        $this->join[] = "$type JOIN $table ON $condition";
         return $this;
     }
 

@@ -16,9 +16,10 @@
             <thead>
                 <tr>
                     <th>No. </th>
+                    <th>NIK</th>
                     <th>Gaji</th>
-                    <th>Potongan</th>
-                    <th>Gaji Bersih</th>
+                    <th>Tanggal Gaji</th>
+                    <th>Proyek</th>
                     <?php if (Session::get('level') == 'admin') : ?>
                         <th>Aksi</th>
                     <?php endif; ?>
@@ -31,14 +32,15 @@
                         <td>
                             <strong><?= $i++ ?></strong>
                         </td>
+                        <td><?= $data['nik'] ?? '-' ?></td>
                         <td>
                             Rp <?= number_format($data['gaji'], 2, ',', '.') ?>
                         </td>
                         <td>
-                            Rp <?= number_format($data['potongan'], 2, ',', '.') ?>
+                            <?= $data['tanggal_gaji'] ?? '-' ?>
                         </td>
                         <td>
-                            Rp <?= number_format($data['gaji_bersih'], 2, ',', '.') ?>
+                            <?= $data['nama'] ?? '-' ?>
                         </td>
                         <?php if (Session::get('level') == 'admin') : ?>
                             <td>

@@ -17,12 +17,23 @@
                         <input type="text" class="form-control" id="gaji" name="gaji" placeholder="Jumlah Gaji (Rupiah)" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="gaji_bersih">Jumlah Gaji Bersih</label>
-                        <input type="text" class="form-control" id="gaji_bersih" name="gaji_bersih" placeholder="Jumlah Gaji Bersih (Rupiah)" required />
+                        <label class="form-label" for="nik">NIK</label>
+                        <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukan NIK" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="potongan">Jumlah Potongan</label>
-                        <input type="text" class="form-control" id="potongan" name="potongan" placeholder="Jumlah Potongan (Rupiah)" required />
+                        <label class="form-label" for="tanggal_gaji">Tanggal Gaji</label>
+                        <input type="date" class="form-control" id="tanggal_gaji" name="tanggal_gaji" placeholder="Masukan Tanggal Gaji" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="id_proyek">Project</label>
+                        <select id="id_proyek" name="id_proyek" class="form-select" required>
+                            <option value="">Pilih Project</option>
+                            <?php foreach ($proyek as $data) : ?>
+                                <option value="<?= $data['id_proyek'] ?>">
+                                    <?= $data['nama'] ?> (<?= $data['kategori'] ?>)
+                                </option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
 
                     <div class="mt-1">

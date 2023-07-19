@@ -122,21 +122,23 @@ $router->get('/jabatan/:id/delete', function ($id) use ($db) {
 
 /** Gaji Section */
 $router->get('/gaji', function () use ($template, $db) {
-    $gaji = $db->table('gaji')->findAll();
+    $gaji = $db->table('gaji')->join('proyek', 'proyek.id_proyek=gaji.id_proyek', 'left')->findAll();
 
     return $template->withLayout('dashboard')->render('gaji/index', compact('gaji'));
 })->with('auth');
 
-$router->get('/gaji/add', function () use ($template) {
+$router->get('/gaji/add', function () use ($template, $db) {
+    $proyek = $db->table('proyek')->findAll();
 
-    return $template->withLayout('dashboard')->render('gaji/add');
+    return $template->withLayout('dashboard')->render('gaji/add', compact('proyek'));
 })->with('admin');
 
 $router->post('/gaji', function () use ($db) {
     $success = $db->table('gaji')->insert([
         'gaji' => $_POST['gaji'],
-        'potongan' => $_POST['potongan'],
-        'gaji_bersih' => $_POST['gaji'],
+        'nik' => $_POST['nik'],
+        'tanggal_gaji' => $_POST['tanggal_gaji'],
+        'id_proyek' => $_POST['id_proyek'],
     ]);
 
     if (!$success) {
@@ -147,19 +149,21 @@ $router->post('/gaji', function () use ($db) {
 })->with('admin');
 
 $router->get('/gaji/:id', function ($id) use ($template, $db) {
+    $proyek = $db->table('proyek')->findAll();
     $gaji = $db->table('gaji')->where('id_gaji', $id)->find();
     if ($gaji == null) {
         return Redirect::withMessage('error', 'Gagal memuat data');
     }
 
-    return $template->withLayout('dashboard')->render('gaji/edit', compact('gaji'));
+    return $template->withLayout('dashboard')->render('gaji/edit', compact('gaji', 'proyek'));
 })->with('admin');
 
 $router->post('/gaji/:id', function ($id) use ($db) {
     $success = $db->table('gaji')->where('id_gaji', $id)->update([
         'gaji' => $_POST['gaji'],
-        'potongan' => $_POST['potongan'],
-        'gaji_bersih' => $_POST['gaji'],
+        'nik' => $_POST['nik'],
+        'tanggal_gaji' => $_POST['tanggal_gaji'],
+        'id_proyek' => $_POST['id_proyek'],
     ]);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/gaji');
