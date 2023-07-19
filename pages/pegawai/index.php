@@ -17,14 +17,13 @@
                 <tr>
                     <th>No.</th>
                     <th>Nama Pegawai</th>
+                    <th>NIK</th>
                     <th>Jenis Kelamin</th>
                     <th>Agama</th>
-                    <th>Alamat</th>
                     <th>No. Telp</th>
-                    <th>Email</th>
+                    <th>Proyek</th>
                     <th>Jabatan</th>
                     <th>Gaji</th>
-                    <th>Username</th>
                     <?php if (Session::get('level') == 'admin') : ?>
                         <th>Aksi</th>
                     <?php endif; ?>
@@ -38,14 +37,13 @@
                             <strong><?= $i++ ?></strong>
                         </td>
                         <td><?= $data['nama'] ?></td>
+                        <td><?= $data['nik'] ?? '-' ?></td>
                         <td><?= $data['jenis_kelamin'] ?></td>
                         <td><?= $data['agama'] ?></td>
-                        <td><?= $data['alamat'] ?></td>
                         <td><?= $data['no_telp'] ?></td>
-                        <td><?= $data['email'] ?></td>
+                        <td><?= $data['nama_proyek'] ?? '-' ?></td>
                         <td><?= $data['nama_jabatan'] ?></td>
-                        <td><?= number_format($data['gaji'], 2, ',', '.') ?></td>
-                        <td><?= $data['username'] ?></td>
+                        <td>Rp <?= number_format($data['gaji'], 2, ',', '.') ?></td>
                         <?php if (Session::get('level') == 'admin') : ?>
                             <td>
                                 <a href="<?= Router::baseUrl('pegawai/' . $data['id_pegawai']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>

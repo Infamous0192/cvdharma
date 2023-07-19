@@ -184,9 +184,11 @@ $router->get('/gaji/:id/delete', function ($id) use ($db) {
 /** Pegawai Section */
 $router->get('/pegawai', function () use ($template, $db) {
     $pegawai = $db->table('pegawai')
+        ->select('pegawai.id_pegawai, pegawai.nama, pegawai.nik, pegawai.jenis_kelamin, pegawai.agama, pegawai.no_telp, proyek.nama as nama_proyek, gaji.gaji, jabatan.nama_jabatan')
         ->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
         ->join('gaji', 'pegawai.id_gaji = gaji.id_gaji')
-        ->join('pengguna', 'pegawai.id_user = pengguna.id_user')
+        ->join('pengguna', 'pegawai.id_user = pengguna.id_user', 'left')
+        ->join('proyek', 'pegawai.id_proyek = proyek.id_proyek', 'left')
         ->findAll();
 
     return $template->withLayout('dashboard')->render('pegawai/index', compact('pegawai'));
@@ -195,13 +197,14 @@ $router->get('/pegawai', function () use ($template, $db) {
 $router->get('/pegawai/add', function () use ($template, $db) {
     $jabatan = $db->table('jabatan')->findAll();
     $gaji = $db->table('gaji')->findAll();
-    $pengguna = $db->table('pengguna')->findAll();
+    $proyek = $db->table('proyek')->findAll();
 
-    return $template->withLayout('dashboard')->render('pegawai/add', compact('jabatan', 'gaji', 'pengguna'));
+    return $template->withLayout('dashboard')->render('pegawai/add', compact('jabatan', 'gaji', 'proyek'));
 })->with('admin');
 
 $router->post('/pegawai', function () use ($db) {
     $success = $db->table('pegawai')->insert([
+        'nik' => $_POST['nik'],
         'nama' => $_POST['nama'],
         'jenis_kelamin' => $_POST['jenis_kelamin'],
         'agama' => $_POST['agama'],
@@ -210,7 +213,7 @@ $router->post('/pegawai', function () use ($db) {
         'email' => $_POST['email'],
         'id_jabatan' => $_POST['id_jabatan'],
         'id_gaji' => $_POST['id_gaji'],
-        'id_user' => $_POST['id_user'],
+        'id_proyek' => $_POST['id_proyek'],
     ]);
 
     if (!$success) {
@@ -223,18 +226,19 @@ $router->post('/pegawai', function () use ($db) {
 $router->get('/pegawai/:id', function ($id) use ($template, $db) {
     $jabatan = $db->table('jabatan')->findAll();
     $gaji = $db->table('gaji')->findAll();
-    $pengguna = $db->table('pengguna')->findAll();
+    $proyek = $db->table('proyek')->findAll();
 
     $pegawai = $db->table('pegawai')->where('id_pegawai', $id)->find();
     if ($pegawai == null) {
         return Redirect::withMessage('error', 'Gagal memuat data');
     }
 
-    return $template->withLayout('dashboard')->render('pegawai/edit', compact('pegawai', 'jabatan', 'gaji', 'pengguna'));
+    return $template->withLayout('dashboard')->render('pegawai/edit', compact('pegawai', 'jabatan', 'gaji', 'proyek'));
 })->with('admin');
 
 $router->post('/pegawai/:id', function ($id) use ($db) {
     $success = $db->table('pegawai')->where('id_pegawai', $id)->update([
+        'nik' => $_POST['nik'],
         'nama' => $_POST['nama'],
         'jenis_kelamin' => $_POST['jenis_kelamin'],
         'agama' => $_POST['agama'],
@@ -243,7 +247,7 @@ $router->post('/pegawai/:id', function ($id) use ($db) {
         'email' => $_POST['email'],
         'id_jabatan' => $_POST['id_jabatan'],
         'id_gaji' => $_POST['id_gaji'],
-        'id_user' => $_POST['id_user'],
+        'id_proyek' => $_POST['id_proyek'],
     ]);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/pegawai');

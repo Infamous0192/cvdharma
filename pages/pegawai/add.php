@@ -1,5 +1,5 @@
 <h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">Jabatan /</span>
+    <span class="text-muted fw-light">Pegawai /</span>
     Tambah Data
 </h4>
 
@@ -8,13 +8,17 @@
     <div class="col-xl">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Tambah Jabatan</h5>
+                <h5 class="mb-0">Tambah Pegawai</h5>
             </div>
             <div class="card-body">
-                <form action="<?= Router::baseUrl('jabatan') ?>" method="post">
+                <form action="<?= Router::baseUrl('pegawai') ?>" method="post">
                     <div class="mb-3">
                         <label class="form-label" for="nama">Nama Pegawai</label>
                         <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pegawai" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="nik">NIK</label>
+                        <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukan NIK" required />
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
@@ -71,12 +75,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="id_user">Username</label>
-                        <select id="id_user" name="id_user" class="form-select" required>
-                            <option value="">Pilih Pengguna</option>
-                            <?php foreach ($pengguna as $data) : ?>
-                                <option value="<?= $data['id_user'] ?>">
-                                    <?= $data['username'] ?>
+                        <label class="form-label" for="id_proyek">Project</label>
+                        <select id="id_proyek" name="id_proyek" class="form-select" required>
+                            <option value="">Pilih Project</option>
+                            <?php foreach ($proyek as $data) : ?>
+                                <option value="<?= $data['id_proyek'] ?>">
+                                    <?= $data['nama'] ?> (<?= $data['kategori'] ?>)
                                 </option>
                             <?php endforeach ?>
                         </select>
