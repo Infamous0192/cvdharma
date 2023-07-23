@@ -21,7 +21,6 @@
                     <th>Jenis Kelamin</th>
                     <th>Agama</th>
                     <th>No. Telp</th>
-                    <th>Proyek</th>
                     <th>Akhir Kontrak</th>
                     <th>Jabatan</th>
                     <th>Gaji</th>
@@ -43,7 +42,6 @@
                         <td><?= $data['agama'] ?></td>
                         <td><?= $data['no_telp'] ?></td>
                         <td><?= $data['nama_proyek'] ?? '-' ?></td>
-                        <td><?= $data['tanggal_kontrak'] ?? '-' ?></td>
                         <td><?= $data['nama_jabatan'] ?></td>
                         <td>Rp <?= number_format($data['gaji'], 2, ',', '.') ?></td>
                         <?php if (Session::get('level') == 'admin') : ?>
@@ -68,7 +66,7 @@
                 title: "Daftar Pegawai - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
                     modifier: {
                         selected: null,
                     },
