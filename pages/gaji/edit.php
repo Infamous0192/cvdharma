@@ -23,17 +23,6 @@
                         <label class="form-label" for="tanggal_gaji">Tanggal Gaji</label>
                         <input type="date" value="<?= $gaji['tanggal_gaji'] ?>" class="form-control" id="tanggal_gaji" name="tanggal_gaji" placeholder="Masukan Tanggal Gaji" required />
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="id_proyek">Project</label>
-                        <select id="id_proyek" name="id_proyek" class="form-select" required>
-                            <option value="">Pilih Project</option>
-                            <?php foreach ($proyek as $data) : ?>
-                                <option value="<?= $data['id_proyek'] ?>" <?= $data['id_proyek'] == $gaji['id_proyek'] ? "selected" : "" ?>>
-                                    <?= $data['nama'] ?> (<?= $data['kategori'] ?>)
-                                </option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
 
                     <div class="mt-1">
                         <button type="submit" name="Submit" class="btn btn-primary">Simpan</button>

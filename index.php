@@ -122,15 +122,13 @@ $router->get('/jabatan/:id/delete', function ($id) use ($db) {
 
 /** Gaji Section */
 $router->get('/gaji', function () use ($template, $db) {
-    $gaji = $db->table('gaji')->join('proyek', 'proyek.id_proyek=gaji.id_proyek', 'left')->findAll();
+    $gaji = $db->table('gaji')->findAll();
 
     return $template->withLayout('dashboard')->render('gaji/index', compact('gaji'));
 })->with('auth');
 
-$router->get('/gaji/add', function () use ($template, $db) {
-    $proyek = $db->table('proyek')->findAll();
-
-    return $template->withLayout('dashboard')->render('gaji/add', compact('proyek'));
+$router->get('/gaji/add', function () use ($template) {
+    return $template->withLayout('dashboard')->render('gaji/add');
 })->with('admin');
 
 $router->post('/gaji', function () use ($db) {
@@ -138,7 +136,6 @@ $router->post('/gaji', function () use ($db) {
         'gaji' => $_POST['gaji'],
         'nik' => $_POST['nik'],
         'tanggal_gaji' => $_POST['tanggal_gaji'],
-        'id_proyek' => $_POST['id_proyek'],
     ]);
 
     if (!$success) {
@@ -149,13 +146,12 @@ $router->post('/gaji', function () use ($db) {
 })->with('admin');
 
 $router->get('/gaji/:id', function ($id) use ($template, $db) {
-    $proyek = $db->table('proyek')->findAll();
     $gaji = $db->table('gaji')->where('id_gaji', $id)->find();
     if ($gaji == null) {
         return Redirect::withMessage('error', 'Gagal memuat data');
     }
 
-    return $template->withLayout('dashboard')->render('gaji/edit', compact('gaji', 'proyek'));
+    return $template->withLayout('dashboard')->render('gaji/edit', compact('gaji'));
 })->with('admin');
 
 $router->post('/gaji/:id', function ($id) use ($db) {
@@ -163,7 +159,6 @@ $router->post('/gaji/:id', function ($id) use ($db) {
         'gaji' => $_POST['gaji'],
         'nik' => $_POST['nik'],
         'tanggal_gaji' => $_POST['tanggal_gaji'],
-        'id_proyek' => $_POST['id_proyek'],
     ]);
     if (!$success) {
         return Redirect::withMessage('error', 'Data gagal diubah')->to('/gaji');

@@ -19,7 +19,6 @@
                     <th>NIK</th>
                     <th>Gaji</th>
                     <th>Tanggal Gaji</th>
-                    <th>Proyek</th>
                     <?php if (Session::get('level') == 'admin') : ?>
                         <th>Aksi</th>
                     <?php endif; ?>
@@ -38,9 +37,6 @@
                         </td>
                         <td>
                             <?= $data['tanggal_gaji'] ?? '-' ?>
-                        </td>
-                        <td>
-                            <?= $data['nama'] ?? '-' ?>
                         </td>
                         <?php if (Session::get('level') == 'admin') : ?>
                             <td>
