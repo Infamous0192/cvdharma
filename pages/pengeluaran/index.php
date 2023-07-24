@@ -12,6 +12,19 @@
     </div>
 
     <div class="table-responsive text-nowrap">
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <select name="" id="jenis-filter" class="form-control">
+                    <option value="">Pilih Jenis</option>
+                    <?php foreach ($jenis as $data) : ?>
+                        <option value="<?= $data ?>">
+                            <?= $data ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+
         <table id="table1" class="table table-striped">
             <thead>
                 <tr>
@@ -48,7 +61,7 @@
 </div>
 
 <script>
-    $("#table1").DataTable({
+    const table1 = $("#table1").DataTable({
         dom: "Bfrtip",
         buttons: [{
                 extend: "pdf",
@@ -56,7 +69,7 @@
                 title: "Daftar Pengeluaran - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1],
+                    columns: [0, 1, 2, 3],
                     modifier: {
                         selected: null,
                     },
@@ -72,7 +85,7 @@
                 title: "Daftar Pengeluaran - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1],
+                    columns: [0, 1, 2, 3],
                     modifier: {
                         selected: null,
                     },
@@ -81,5 +94,14 @@
                 className: "btn-primary",
             },
         ],
+    });
+
+    $('#jenis-filter').on('change', function() {
+        var filterValue = $(this).val();
+
+        table1
+            .columns(1)
+            .search(filterValue)
+            .draw();
     });
 </script>

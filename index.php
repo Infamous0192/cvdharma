@@ -122,9 +122,10 @@ $router->get('/jabatan/:id/delete', function ($id) use ($db) {
 
 /** Gaji Section */
 $router->get('/gaji', function () use ($template, $db) {
+    $nik = $db->table('gaji')->select('nik')->groupBy('nik')->column('nik');
     $gaji = $db->table('gaji')->findAll();
 
-    return $template->withLayout('dashboard')->render('gaji/index', compact('gaji'));
+    return $template->withLayout('dashboard')->render('gaji/index', compact('gaji', 'nik'));
 })->with('auth');
 
 $router->get('/gaji/add', function () use ($template) {
@@ -178,6 +179,8 @@ $router->get('/gaji/:id/delete', function ($id) use ($db) {
 
 /** Pegawai Section */
 $router->get('/pegawai', function () use ($template, $db) {
+    $jabatan = $db->table('jabatan')->select('nama_jabatan')->groupBy('nama_jabatan')->column('nama_jabatan');
+
     $pegawai = $db->table('pegawai')
         ->select('pegawai.id_pegawai, pegawai.nama, pegawai.nik, pegawai.jenis_kelamin, pegawai.agama, pegawai.no_telp, gaji.gaji, jabatan.nama_jabatan')
         ->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
@@ -185,7 +188,7 @@ $router->get('/pegawai', function () use ($template, $db) {
         ->join('pengguna', 'pegawai.id_user = pengguna.id_user', 'left')
         ->findAll();
 
-    return $template->withLayout('dashboard')->render('pegawai/index', compact('pegawai'));
+    return $template->withLayout('dashboard')->render('pegawai/index', compact('pegawai', 'jabatan'));
 })->with('auth');
 
 $router->get('/pegawai/add', function () use ($template, $db) {
@@ -599,9 +602,11 @@ $router->get('/pengawasan/:id_pengawasan/:id_pegawai/delete', function ($id_peng
 
 /** Kontraktor Section */
 $router->get('/kontraktor', function () use ($template, $db) {
+    $proyek = $db->table('proyek')->select('nama')->groupBy('nama')->column('nama');
+    $nama = $db->table('kontraktor')->select('nama_kontraktor')->groupBy('nama_kontraktor')->column('nama_kontraktor');
     $kontraktor = $db->table('kontraktor')->select('id_kontraktor, nama, kontraktor.alamat, kontraktor.telp, kontraktor.penanggung_jawab, nama_kontraktor, kategori, kontraktor.tanggal_mulai, kontraktor.tanggal_selesai, status')->join('proyek', 'proyek.id_proyek = kontraktor.id_proyek')->findAll();
 
-    return $template->withLayout('dashboard')->render('kontraktor/index', compact('kontraktor'));
+    return $template->withLayout('dashboard')->render('kontraktor/index', compact('kontraktor', 'proyek', 'nama'));
 })->with('auth');
 
 $router->get('/kontraktor/add', function () use ($template, $db) {
@@ -687,9 +692,11 @@ $router->get('/laporan/jembatan', function () use ($template, $db) {
 
 /** Pendapatan Section */
 $router->get('/pendapatan', function () use ($template, $db) {
+    $tahun = $db->table('pendapatan')->select('tahun')->groupBy('tahun')->column('tahun');
+    $proyek = $db->table('proyek')->select('nama')->groupBy('nama')->column('nama');
     $pendapatan = $db->table('pendapatan')->join('proyek', 'proyek.id_proyek = pendapatan.id_proyek', 'left')->findAll();
 
-    return $template->withLayout('dashboard')->render('pendapatan/index', compact('pendapatan'));
+    return $template->withLayout('dashboard')->render('pendapatan/index', compact('pendapatan', 'tahun', 'proyek'));
 })->with('auth');
 
 $router->get('/pendapatan/add', function () use ($template, $db) {
@@ -747,9 +754,10 @@ $router->get('/pendapatan/:id/delete', function ($id) use ($db) {
 
 /** Pengeluaran Section */
 $router->get('/pengeluaran', function () use ($template, $db) {
+    $jenis = $db->table('pengeluaran')->select('jenis')->groupBy('jenis')->column('jenis');
     $pengeluaran = $db->table('pengeluaran')->findAll();
 
-    return $template->withLayout('dashboard')->render('pengeluaran/index', compact('pengeluaran'));
+    return $template->withLayout('dashboard')->render('pengeluaran/index', compact('pengeluaran', 'jenis'));
 })->with('auth');
 
 $router->get('/pengeluaran/add', function () use ($template) {

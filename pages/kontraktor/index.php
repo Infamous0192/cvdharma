@@ -12,6 +12,28 @@
     </div>
 
     <div class="table-responsive text-nowrap">
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <select name="" id="proyek-filter" class="form-control">
+                    <option value="">Pilih Proyek</option>
+                    <?php foreach ($proyek as $data) : ?>
+                        <option value="<?= $data ?>">
+                            <?= $data ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="" id="nama-filter" class="form-control">
+                    <option value="">Pilih Nama</option>
+                    <?php foreach ($nama as $data) : ?>
+                        <option value="<?= $data ?>">
+                            <?= $data ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
         <table id="table1" class="table table-striped">
             <thead>
                 <tr>
@@ -54,7 +76,7 @@
 </div>
 
 <script>
-    $("#table1").DataTable({
+    const table1 = $("#table1").DataTable({
         dom: "Bfrtip",
         buttons: [{
                 extend: "pdf",
@@ -87,5 +109,23 @@
                 className: "btn-primary",
             },
         ],
+    });
+
+    $('#nama-filter').on('change', function() {
+        var filterValue = $(this).val();
+
+        table1
+            .columns(1)
+            .search(filterValue)
+            .draw();
+    });
+
+    $('#proyek-filter').on('change', function() {
+        var filterValue = $(this).val();
+
+        table1
+            .columns(2)
+            .search(filterValue)
+            .draw();
     });
 </script>
