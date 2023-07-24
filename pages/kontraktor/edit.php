@@ -28,6 +28,18 @@
                         <input type="text" value="<?= $kontraktor['nama_kontraktor'] ?>" id="nama_kontraktor" name="nama_kontraktor" class="form-control" placeholder="Nama Kontraktor" required>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="penanggung_jawab">Penanggung Jawab</label>
+                        <input type="text" id="penanggung_jawab" value="<?= $kontraktor['penanggung_jawab'] ?>" name="penanggung_jawab" class="form-control" placeholder="Penanggung Jawab" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="telp">No Telepon</label>
+                        <input type="text" id="telp" name="telp" value="<?= $kontraktor['telp'] ?>" class="form-control" placeholder="No Telepon" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="alamat">Alamat</label>
+                        <input type="text" id="alamat" name="alamat" value="<?= $kontraktor['alamat'] ?>" class="form-control" placeholder="Alamat" required>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="tanggal_mulai">Tanggal Mulai</label>
                         <input type="date" value="<?= $kontraktor['tanggal_mulai'] ?>" id="tanggal_mulai" name="tanggal_mulai" class="form-control" placeholder="Tanggal Mulai" required>
                     </div>

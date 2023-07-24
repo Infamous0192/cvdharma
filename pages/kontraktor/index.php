@@ -16,9 +16,11 @@
             <thead>
                 <tr>
                     <th>No. </th>
-                    <th>Nama Proyek</th>
-                    <th>Jenis Proyek</th>
                     <th>Nama Kontraktor</th>
+                    <th>Nama Proyek</th>
+                    <th>Penanggung Jawab</th>
+                    <th>Alamat</th>
+                    <th>No Telepon</th>
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Selesai</th>
                     <th>Status</th>
@@ -33,15 +35,16 @@
                             <strong><?= $i++ ?></strong>
                         </td>
                         <td><?= $data['nama_kontraktor'] ?></td>
-                        <td><?= $data['kategori'] ?></td>
-                        <td><?= $data['nama_kontraktor'] ?></td>
+                        <td><?= $data['nama'] ?></td>
+                        <td><?= $data['penanggung_jawab'] ?? '-' ?></td>
+                        <td><?= $data['alamat'] ?? '-' ?></td>
+                        <td><?= $data['telp'] ?? '-' ?></td>
                         <td><?= $data['tanggal_mulai'] ?></td>
                         <td><?= $data['tanggal_selesai'] ?></td>
                         <td><?= $data['status'] ?></td>
                         <td>
                             <a href="<?= Router::baseUrl('kontraktor/' . $data['id_kontraktor']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
                             <a href="<?= Router::baseUrl('kontraktor/' . $data['id_kontraktor']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
-                            <a href="<?= Router::baseUrl('kontraktor/' . $data['id_kontraktor']) . '/project'  ?>" style="text-decoration:none;" class="btn btn-icon btn-primary"><span class="tf-icons bx bx-user"></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -59,7 +62,7 @@
                 title: "Daftar Kontraktor Project - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                     modifier: {
                         selected: null,
                     },
@@ -75,7 +78,7 @@
                 title: "Daftar Kontraktor Project - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6],
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
                     modifier: {
                         selected: null,
                     },

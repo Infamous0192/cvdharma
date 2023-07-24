@@ -604,7 +604,7 @@ $router->get('/pengawasan/:id_pengawasan/:id_pegawai/delete', function ($id_peng
 
 /** Kontraktor Section */
 $router->get('/kontraktor', function () use ($template, $db) {
-    $kontraktor = $db->table('kontraktor')->select('id_kontraktor, nama, nama_kontraktor, kategori, kontraktor.tanggal_mulai, kontraktor.tanggal_selesai, status')->join('proyek', 'proyek.id_proyek = kontraktor.id_proyek')->findAll();
+    $kontraktor = $db->table('kontraktor')->select('id_kontraktor, nama, kontraktor.alamat, kontraktor.telp, kontraktor.penanggung_jawab, nama_kontraktor, kategori, kontraktor.tanggal_mulai, kontraktor.tanggal_selesai, status')->join('proyek', 'proyek.id_proyek = kontraktor.id_proyek')->findAll();
 
     return $template->withLayout('dashboard')->render('kontraktor/index', compact('kontraktor'));
 })->with('auth');
@@ -621,6 +621,9 @@ $router->post('/kontraktor', function () use ($db) {
         'tanggal_mulai' => $_POST['tanggal_mulai'],
         'tanggal_selesai' => $_POST['tanggal_selesai'],
         'status' => $_POST['status'],
+        'penanggung_jawab' => $_POST['penanggung_jawab'],
+        'alamat' => $_POST['alamat'],
+        'telp' => $_POST['telp'],
         'id_proyek' => $_POST['id_proyek'],
     ]);
 
@@ -647,6 +650,9 @@ $router->post('/kontraktor/:id', function ($id) use ($db) {
         'tanggal_mulai' => $_POST['tanggal_mulai'],
         'tanggal_selesai' => $_POST['tanggal_selesai'],
         'status' => $_POST['status'],
+        'penanggung_jawab' => $_POST['penanggung_jawab'],
+        'alamat' => $_POST['alamat'],
+        'telp' => $_POST['telp'],
         'id_proyek' => $_POST['id_proyek'],
     ]);
     if (!$success) {
