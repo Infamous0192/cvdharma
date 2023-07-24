@@ -21,7 +21,6 @@
                     <th>Jenis Kelamin</th>
                     <th>Agama</th>
                     <th>No. Telp</th>
-                    <th>Akhir Kontrak</th>
                     <th>Jabatan</th>
                     <th>Gaji</th>
                     <?php if (Session::get('level') == 'admin') : ?>
@@ -41,7 +40,6 @@
                         <td><?= $data['jenis_kelamin'] ?></td>
                         <td><?= $data['agama'] ?></td>
                         <td><?= $data['no_telp'] ?></td>
-                        <td><?= $data['nama_proyek'] ?? '-' ?></td>
                         <td><?= $data['nama_jabatan'] ?></td>
                         <td>Rp <?= number_format($data['gaji'], 2, ',', '.') ?></td>
                         <?php if (Session::get('level') == 'admin') : ?>

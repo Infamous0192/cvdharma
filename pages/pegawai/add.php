@@ -74,17 +74,6 @@
                             <?php endforeach ?>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="id_proyek">Project</label>
-                        <select id="id_proyek" name="id_proyek" class="form-select" required>
-                            <option value="">Pilih Project</option>
-                            <?php foreach ($proyek as $data) : ?>
-                                <option value="<?= $data['id_proyek'] ?>">
-                                    <?= $data['nama'] ?> (<?= $data['kategori'] ?>)
-                                </option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
 
                     <div class="mt-2">
                         <button type="submit" name="Submit" class="btn btn-primary">Simpan</button>
