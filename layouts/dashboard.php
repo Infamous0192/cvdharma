@@ -117,6 +117,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-wallet"></i>
+                            <div>Keuangan</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="<?= Router::baseUrl('pendapatan') ?>" class="menu-link">
+                                    <div>Pendapatan</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="<?= Router::baseUrl('pengeluaran') ?>" class="menu-link">
+                                    <div>Pengeluaran</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="menu-item ">
                         <a href="<?= Router::baseUrl('pengawasan') ?>" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-hard-hat"></i>

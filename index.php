@@ -685,6 +685,123 @@ $router->get('/laporan/jembatan', function () use ($template, $db) {
     return $template->withLayout('dashboard')->render('laporan/jembatan', compact('laporan'));
 })->with('auth');
 
+/** Pendapatan Section */
+$router->get('/pendapatan', function () use ($template, $db) {
+    $pendapatan = $db->table('pendapatan')->join('proyek', 'proyek.id_proyek = pendapatan.id_proyek', 'left')->findAll();
+
+    return $template->withLayout('dashboard')->render('pendapatan/index', compact('pendapatan'));
+})->with('auth');
+
+$router->get('/pendapatan/add', function () use ($template, $db) {
+    $proyek = $db->table('proyek')->findAll();
+
+    return $template->withLayout('dashboard')->render('pendapatan/add', compact('proyek'));
+})->with('admin');
+
+$router->post('/pendapatan', function () use ($db) {
+    $success = $db->table('pendapatan')->insert([
+        'nominal' => $_POST['nominal'],
+        'tahun' => $_POST['tahun'],
+        'id_proyek' => $_POST['id_proyek'],
+    ]);
+
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal ditambahkan')->to('/pendapatan');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/pendapatan');
+})->with('admin');
+
+$router->get('/pendapatan/:id', function ($id) use ($template, $db) {
+    $pendapatan = $db->table('pendapatan')->where('id_pendapatan', $id)->find();
+    if ($pendapatan == null) {
+        return Redirect::withMessage('error', 'Gagal memuat data');
+    }
+
+    $proyek = $db->table('proyek')->findAll();
+
+    return $template->withLayout('dashboard')->render('pendapatan/edit', compact('pendapatan', 'proyek'));
+})->with('admin');
+
+$router->post('/pendapatan/:id', function ($id) use ($db) {
+    $success = $db->table('pendapatan')->where('id_pendapatan', $id)->update([
+        'nominal' => $_POST['nominal'],
+        'tahun' => $_POST['tahun'],
+        'id_proyek' => $_POST['id_proyek'],
+    ]);
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal diubah')->to('/pendapatan');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil diubah')->to('/pendapatan');
+})->with('admin');
+
+$router->get('/pendapatan/:id/delete', function ($id) use ($db) {
+    $success = $db->table('pendapatan')->where('id_pendapatan', $id)->delete();
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal dihapus')->to('/pendapatan');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/pendapatan');;
+})->with('auth');
+
+/** Pengeluaran Section */
+$router->get('/pengeluaran', function () use ($template, $db) {
+    $pengeluaran = $db->table('pengeluaran')->findAll();
+
+    return $template->withLayout('dashboard')->render('pengeluaran/index', compact('pengeluaran'));
+})->with('auth');
+
+$router->get('/pengeluaran/add', function () use ($template) {
+
+    return $template->withLayout('dashboard')->render('pengeluaran/add');
+})->with('admin');
+
+$router->post('/pengeluaran', function () use ($db) {
+    $success = $db->table('pengeluaran')->insert([
+        'jenis' => $_POST['jenis'],
+        'nominal' => $_POST['nominal'],
+        'tanggal' => $_POST['tanggal'],
+    ]);
+
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal ditambahkan')->to('/pengeluaran');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/pengeluaran');
+})->with('admin');
+
+$router->get('/pengeluaran/:id', function ($id) use ($template, $db) {
+    $pengeluaran = $db->table('pengeluaran')->where('id_pengeluaran', $id)->find();
+    if ($pengeluaran == null) {
+        return Redirect::withMessage('error', 'Gagal memuat data');
+    }
+
+    return $template->withLayout('dashboard')->render('pengeluaran/edit', compact('pengeluaran'));
+})->with('admin');
+
+$router->post('/pengeluaran/:id', function ($id) use ($db) {
+    $success = $db->table('pengeluaran')->where('id_pengeluaran', $id)->update([
+        'jenis' => $_POST['jenis'],
+        'nominal' => $_POST['nominal'],
+        'tanggal' => $_POST['tanggal'],
+    ]);
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal diubah')->to('/pengeluaran');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil diubah')->to('/pengeluaran');
+})->with('admin');
+
+$router->get('/pengeluaran/:id/delete', function ($id) use ($db) {
+    $success = $db->table('pengeluaran')->where('id_pengeluaran', $id)->delete();
+    if (!$success) {
+        return Redirect::withMessage('error', 'Data gagal dihapus')->to('/pengeluaran');
+    }
+
+    return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/pengeluaran');;
+})->with('auth');
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestUrl = $_SERVER['REQUEST_URI'];
 
