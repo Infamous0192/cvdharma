@@ -43,8 +43,6 @@
                     <th>Penanggung Jawab</th>
                     <th>Alamat</th>
                     <th>No Telepon</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Selesai</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -82,7 +80,7 @@
                 title: "Daftar Kontraktor Project - CV. Dharma Cipta Pratama",
                 download: "open",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    columns: [0, 1, 2, 3, 4, 5, 6],
                     modifier: {
                         selected: null,
                     },
@@ -98,7 +96,7 @@
                 title: "Daftar Kontraktor Project - CV. Dharma Cipta Pratama",
                 orientation: "potrait",
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    columns: [0, 1, 2, 3, 4, 5, 6],
                     modifier: {
                         selected: null,
                     },
