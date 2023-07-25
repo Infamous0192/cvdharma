@@ -24,7 +24,7 @@
                         <select id="id_proyek" name="id_proyek" class="form-select" required>
                             <option value="">Pilih Project</option>
                             <?php foreach ($proyek as $data) : ?>
-                                <option value="<?= $data['id_proyek'] ?>" <?= $data['id_proyek'] == $pengawasan['id_proyek'] ? "selected" : "" ?>>
+                                <option value="<?= $data['id_proyek'] ?>" <?= $data['id_proyek'] == $pendapatan['id_proyek'] ? "selected" : "" ?>>
                                     <?= $data['nama'] ?> (<?= $data['kategori'] ?>)
                                 </option>
                             <?php endforeach ?>

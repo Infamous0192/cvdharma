@@ -27,9 +27,9 @@
     </div>
 </form>
 
-<p class="text-center">
+<!-- <p class="text-center">
     <span>Belum punya akun?</span>
     <a href="daftar.php">
         <span>Daftar</span>
     </a>
-</p>
+</p> -->

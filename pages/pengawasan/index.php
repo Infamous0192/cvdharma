@@ -72,7 +72,6 @@
                             <td>
                                 <a href="<?= Router::baseUrl('pengawasan/' . $data['id_pengawasan']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
                                 <a href="<?= Router::baseUrl('pengawasan/' . $data['id_pengawasan']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
-                                <a href="<?= Router::baseUrl('pengawasan/' . $data['id_pengawasan']) . '/project'  ?>" style="text-decoration:none;" class="btn btn-icon btn-primary"><span class="tf-icons bx bx-user"></a>
                             </td>
                             <td><?= $data['nama'] ?></td>
                             <td><?= $data['kategori'] ?></td>

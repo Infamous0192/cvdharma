@@ -61,8 +61,6 @@
                         <td><?= $data['penanggung_jawab'] ?? '-' ?></td>
                         <td><?= $data['alamat'] ?? '-' ?></td>
                         <td><?= $data['telp'] ?? '-' ?></td>
-                        <td><?= $data['tanggal_mulai'] ?></td>
-                        <td><?= $data['tanggal_selesai'] ?></td>
                         <td><?= $data['status'] ?></td>
                         <td>
                             <a href="<?= Router::baseUrl('kontraktor/' . $data['id_kontraktor']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>

@@ -40,14 +40,6 @@
                         <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Alamat" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="tanggal_mulai">Tanggal Mulai</label>
-                        <input type="date" id="tanggal_mulai" name="tanggal_mulai" class="form-control" placeholder="Tanggal Mulai" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="tanggal_selesai">Tanggal Selesai</label>
-                        <input type="date" id="tanggal_selesai" name="tanggal_selesai" class="form-control" placeholder="Tanggal Selesai" required>
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label" for="status">Status</label>
                         <select id="status" name="status" class="form-select" required>
                             <option value="">Pilih Status</option>
