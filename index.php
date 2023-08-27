@@ -148,7 +148,7 @@ $router->get('/jabatan/:id/delete', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/jabatan');;
-})->with('auth');
+})->with('admin');
 
 /** Gaji Section */
 $router->get('/gaji', function () use ($template, $db) {
@@ -205,7 +205,7 @@ $router->get('/gaji/:id/delete', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil dihapus')->to('/gaji');;
-})->with('auth');
+})->with('admin');
 
 /** Pegawai Section */
 $router->get('/pegawai', function () use ($template, $db) {
@@ -226,7 +226,7 @@ $router->get('/pegawai/add', function () use ($template, $db) {
     $gaji = $db->table('gaji')->findAll();
 
     return $template->withLayout('dashboard')->render('pegawai/add', compact('jabatan', 'gaji'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pegawai', function () use ($db) {
     $success = $db->table('pegawai')->insert([
@@ -246,7 +246,7 @@ $router->post('/pegawai', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/pegawai');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pegawai/:id', function ($id) use ($template, $db) {
     $pegawai = $db->table('pegawai')->where('id_pegawai', $id)->find();
@@ -258,7 +258,7 @@ $router->get('/pegawai/:id', function ($id) use ($template, $db) {
     $gaji = $db->table('gaji')->findAll();
 
     return $template->withLayout('dashboard')->render('pegawai/edit', compact('pegawai', 'gaji', 'jabatan'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pegawai/:id', function ($id) use ($db) {
     $success = $db->table('pegawai')->where('id_pegawai', $id)->update([
@@ -277,7 +277,7 @@ $router->post('/pegawai/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/pegawai');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pegawai/:id/delete', function ($id) use ($db) {
     $success = $db->table('pegawai')->where('id_pegawai', $id)->delete();
@@ -297,7 +297,7 @@ $router->get('/bangunan', function () use ($template, $db) {
 
 $router->get('/bangunan/add', function () use ($template) {
     return $template->withLayout('dashboard')->render('bangunan/add');
-})->with('admin');
+})->with('auth');
 
 $router->post('/bangunan', function () use ($db) {
     $success = $db->table('proyek')->insert([
@@ -318,7 +318,7 @@ $router->post('/bangunan', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/bangunan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/bangunan/:id', function ($id) use ($template, $db) {
     $bangunan = $db->table('proyek')->where('id_proyek', $id)->where('kategori', '\'Bangunan\'')->find();
@@ -327,7 +327,7 @@ $router->get('/bangunan/:id', function ($id) use ($template, $db) {
     }
 
     return $template->withLayout('dashboard')->render('bangunan/edit', compact('bangunan'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/bangunan/:id', function ($id) use ($db) {
     $success = $db->table('proyek')->where('id_proyek', $id)->update([
@@ -347,7 +347,7 @@ $router->post('/bangunan/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/bangunan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/bangunan/:id/delete', function ($id) use ($db) {
     $success = $db->table('proyek')->where('id_proyek', $id)->delete();
@@ -367,7 +367,7 @@ $router->get('/jalan', function () use ($template, $db) {
 
 $router->get('/jalan/add', function () use ($template) {
     return $template->withLayout('dashboard')->render('jalan/add');
-})->with('admin');
+})->with('auth');
 
 $router->post('/jalan', function () use ($db) {
     $success = $db->table('proyek')->insert([
@@ -388,7 +388,7 @@ $router->post('/jalan', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/jalan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/jalan/:id', function ($id) use ($template, $db) {
     $jalan = $db->table('proyek')->where('id_proyek', $id)->where('kategori', '\'Jalan\'')->find();
@@ -397,7 +397,7 @@ $router->get('/jalan/:id', function ($id) use ($template, $db) {
     }
 
     return $template->withLayout('dashboard')->render('jalan/edit', compact('jalan'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/jalan/:id', function ($id) use ($db) {
     $success = $db->table('proyek')->where('id_proyek', $id)->update([
@@ -417,7 +417,7 @@ $router->post('/jalan/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/jalan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/jalan/:id/delete', function ($id) use ($db) {
     $success = $db->table('proyek')->where('id_proyek', $id)->delete();
@@ -437,7 +437,7 @@ $router->get('/jembatan', function () use ($template, $db) {
 
 $router->get('/jembatan/add', function () use ($template) {
     return $template->withLayout('dashboard')->render('jembatan/add');
-})->with('admin');
+})->with('auth');
 
 $router->post('/jembatan', function () use ($db) {
     $success = $db->table('proyek')->insert([
@@ -458,7 +458,7 @@ $router->post('/jembatan', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/jembatan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/jembatan/:id', function ($id) use ($template, $db) {
     $jembatan = $db->table('proyek')->where('id_proyek', $id)->where('kategori', '\'Jembatan\'')->find();
@@ -467,7 +467,7 @@ $router->get('/jembatan/:id', function ($id) use ($template, $db) {
     }
 
     return $template->withLayout('dashboard')->render('jembatan/edit', compact('jembatan'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/jembatan/:id', function ($id) use ($db) {
     $success = $db->table('proyek')->where('id_proyek', $id)->update([
@@ -487,7 +487,7 @@ $router->post('/jembatan/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/jembatan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/jembatan/:id/delete', function ($id) use ($db) {
     $success = $db->table('proyek')->where('id_proyek', $id)->delete();
@@ -512,7 +512,7 @@ $router->get('/pengawasan/add', function () use ($template, $db) {
     $proyek = $db->table('proyek')->findAll();
 
     return $template->withLayout('dashboard')->render('pengawasan/add', compact('proyek'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pengawasan', function () use ($db) {
     $foto = FileUpload::upload('foto');
@@ -542,7 +542,7 @@ $router->post('/pengawasan', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/pengawasan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pengawasan/:id', function ($id) use ($template, $db) {
     $proyek = $db->table('proyek')->findAll();
@@ -552,7 +552,7 @@ $router->get('/pengawasan/:id', function ($id) use ($template, $db) {
     }
 
     return $template->withLayout('dashboard')->render('pengawasan/edit', compact('pengawasan', 'proyek'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pengawasan/:id', function ($id) use ($db) {
     $data = [
@@ -589,7 +589,7 @@ $router->post('/pengawasan/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/pengawasan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pengawasan/:id/delete', function ($id) use ($db) {
     $success = $db->table('pengawasan')->where('id_pengawasan', $id)->delete();
@@ -643,7 +643,7 @@ $router->get('/kontraktor/add', function () use ($template, $db) {
     $proyek = $db->table('proyek')->findAll();
 
     return $template->withLayout('dashboard')->render('kontraktor/add', compact('proyek'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/kontraktor', function () use ($db) {
     $success = $db->table('kontraktor')->insert([
@@ -660,7 +660,7 @@ $router->post('/kontraktor', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/kontraktor');
-})->with('admin');
+})->with('auth');
 
 $router->get('/kontraktor/:id', function ($id) use ($template, $db) {
     $proyek = $db->table('proyek')->findAll();
@@ -670,7 +670,7 @@ $router->get('/kontraktor/:id', function ($id) use ($template, $db) {
     }
 
     return $template->withLayout('dashboard')->render('kontraktor/edit', compact('kontraktor', 'proyek'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/kontraktor/:id', function ($id) use ($db) {
     $success = $db->table('kontraktor')->where('id_kontraktor', $id)->update([
@@ -686,7 +686,7 @@ $router->post('/kontraktor/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/kontraktor');
-})->with('admin');
+})->with('auth');
 
 $router->get('/kontraktor/:id/delete', function ($id) use ($db) {
     $success = $db->table('kontraktor')->where('id_kontraktor', $id)->delete();
@@ -729,7 +729,7 @@ $router->get('/pendapatan/add', function () use ($template, $db) {
     $proyek = $db->table('proyek')->findAll();
 
     return $template->withLayout('dashboard')->render('pendapatan/add', compact('proyek'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pendapatan', function () use ($db) {
     $success = $db->table('pendapatan')->insert([
@@ -743,7 +743,7 @@ $router->post('/pendapatan', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/pendapatan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pendapatan/:id', function ($id) use ($template, $db) {
     $pendapatan = $db->table('pendapatan')->where('id_pendapatan', $id)->find();
@@ -754,7 +754,7 @@ $router->get('/pendapatan/:id', function ($id) use ($template, $db) {
     $proyek = $db->table('proyek')->findAll();
 
     return $template->withLayout('dashboard')->render('pendapatan/edit', compact('pendapatan', 'proyek'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pendapatan/:id', function ($id) use ($db) {
     $success = $db->table('pendapatan')->where('id_pendapatan', $id)->update([
@@ -767,7 +767,7 @@ $router->post('/pendapatan/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/pendapatan');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pendapatan/:id/delete', function ($id) use ($db) {
     $success = $db->table('pendapatan')->where('id_pendapatan', $id)->delete();
@@ -789,7 +789,7 @@ $router->get('/pengeluaran', function () use ($template, $db) {
 $router->get('/pengeluaran/add', function () use ($template) {
 
     return $template->withLayout('dashboard')->render('pengeluaran/add');
-})->with('admin');
+})->with('auth');
 
 $router->post('/pengeluaran', function () use ($db) {
     $success = $db->table('pengeluaran')->insert([
@@ -803,7 +803,7 @@ $router->post('/pengeluaran', function () use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil ditambahkan')->to('/pengeluaran');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pengeluaran/:id', function ($id) use ($template, $db) {
     $pengeluaran = $db->table('pengeluaran')->where('id_pengeluaran', $id)->find();
@@ -812,7 +812,7 @@ $router->get('/pengeluaran/:id', function ($id) use ($template, $db) {
     }
 
     return $template->withLayout('dashboard')->render('pengeluaran/edit', compact('pengeluaran'));
-})->with('admin');
+})->with('auth');
 
 $router->post('/pengeluaran/:id', function ($id) use ($db) {
     $success = $db->table('pengeluaran')->where('id_pengeluaran', $id)->update([
@@ -825,7 +825,7 @@ $router->post('/pengeluaran/:id', function ($id) use ($db) {
     }
 
     return Redirect::withMessage('success', 'Data berhasil diubah')->to('/pengeluaran');
-})->with('admin');
+})->with('auth');
 
 $router->get('/pengeluaran/:id/delete', function ($id) use ($db) {
     $success = $db->table('pengeluaran')->where('id_pengeluaran', $id)->delete();

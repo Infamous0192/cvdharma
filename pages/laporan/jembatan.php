@@ -11,8 +11,6 @@
                 <tr>
                     <th>No. </th>
                     <th>Nama Project</th>
-                    <th>Tgl. Mulai</th>
-                    <th>Tgl. Selesai</th>
                     <th>Kemajuan</th>
                     <th>Jenis Project</th>
                     <th>Keterangan</th>
@@ -26,8 +24,6 @@
                             <strong><?= $i++ ?></strong>
                         </td>
                         <td><?= $data['nama'] ?></td>
-                        <td><?= $data['tgl_mulai'] ?></td>
-                        <td><?= $data['tgl_selesai'] ?></td>
                         <td><?= $data['kemajuan'] ?></td>
                         <td><?= $data['kategori'] ?></td>
                         <td><?= $data['keterangan'] ?></td>

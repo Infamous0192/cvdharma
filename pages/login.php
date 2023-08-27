@@ -28,8 +28,8 @@
 </form>
 
 <p class="text-center">
-    <span>Belum punya akun?</span>
+    <span>Klik daftar untuk menambah user</span>
     <a href="register">
-        <span>Daftar</span>
+        <span> Daftar</span>
     </a>
 </p>

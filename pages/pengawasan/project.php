@@ -76,9 +76,7 @@
                     <th>No. </th>
                     <th>Nama Pegawai</th>
                     <th>Role</th>
-                    <?php if (Session::get('level') == 'admin') : ?>
-                        <th>Aksi</th>
-                    <?php endif; ?>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -90,13 +88,11 @@
                         </td>
                         <td><?= $data['nama'] ?></td>
                         <td><?= $data['role'] ?></td>
-                        <?php if (Session::get('level') == 'admin') : ?>
-                            <td>
-                                <a href="<?= Router::baseUrl('pengawasan/' . $pengawasan['id_pengawasan'] . '/' . $data['id_pegawai'] . '/delete') ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger">
-                                    <span class="tf-icons bx bx-trash"></span>
-                                </a>
-                            </td>
-                        <?php endif; ?>
+                        <td>
+                            <a href="<?= Router::baseUrl('pengawasan/' . $pengawasan['id_pengawasan'] . '/' . $data['id_pegawai'] . '/delete') ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger">
+                                <span class="tf-icons bx bx-trash"></span>
+                            </a>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

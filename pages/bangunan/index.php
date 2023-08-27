@@ -25,9 +25,7 @@
                     <th>Panjang</th>
                     <th>Lebar</th>
                     <th>Tinggi</th>
-                    <?php if (Session::get('level') == 'admin') : ?>
-                        <th>Aksi</th>
-                    <?php endif; ?>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -46,12 +44,10 @@
                         <td><?= $data['panjang'] ?></td>
                         <td><?= $data['lebar'] ?></td>
                         <td><?= $data['tinggi'] ?></td>
-                        <?php if (Session::get('level') == 'admin') : ?>
-                            <td>
-                                <a href="<?= Router::baseUrl('bangunan/' . $data['id_proyek']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
-                                <a href="<?= Router::baseUrl('bangunan/' . $data['id_proyek']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
-                            </td>
-                        <?php endif ?>
+                        <td>
+                            <a href="<?= Router::baseUrl('bangunan/' . $data['id_proyek']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
+                            <a href="<?= Router::baseUrl('bangunan/' . $data['id_proyek']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

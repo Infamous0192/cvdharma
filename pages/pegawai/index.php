@@ -36,9 +36,7 @@
                     <th>No. Telp</th>
                     <th>Jabatan</th>
                     <th>Gaji</th>
-                    <?php if (Session::get('level') == 'admin') : ?>
-                        <th>Aksi</th>
-                    <?php endif; ?>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -55,12 +53,10 @@
                         <td><?= $data['no_telp'] ?></td>
                         <td><?= $data['nama_jabatan'] ?></td>
                         <td>Rp <?= number_format($data['gaji'], 2, ',', '.') ?></td>
-                        <?php if (Session::get('level') == 'admin') : ?>
-                            <td>
-                                <a href="<?= Router::baseUrl('pegawai/' . $data['id_pegawai']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
-                                <a href="<?= Router::baseUrl('pegawai/' . $data['id_pegawai']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
-                            </td>
-                        <?php endif ?>
+                        <td>
+                            <a href="<?= Router::baseUrl('pegawai/' . $data['id_pegawai']) ?>" style="text-decoration:none;" class="btn btn-icon btn-warning"><span class="tf-icons bx bx-edit"></span></a>
+                            <a href="<?= Router::baseUrl('pegawai/' . $data['id_pegawai']) . '/delete'  ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="text-decoration:none;" class="btn btn-icon btn-danger"><span class="tf-icons bx bx-trash"></span></a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
