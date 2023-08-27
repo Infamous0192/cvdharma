@@ -721,8 +721,9 @@ $router->get('/pendapatan', function () use ($template, $db) {
     $tahun = $db->table('pendapatan')->select('tahun')->groupBy('tahun')->column('tahun');
     $proyek = $db->table('proyek')->select('nama')->groupBy('nama')->column('nama');
     $pendapatan = $db->table('pendapatan')->join('proyek', 'proyek.id_proyek = pendapatan.id_proyek', 'left')->findAll();
+    $summary = $db->table('pendapatan')->select('tahun, SUM(nominal) AS total')->groupBy('tahun')->findAll();
 
-    return $template->withLayout('dashboard')->render('pendapatan/index', compact('pendapatan', 'tahun', 'proyek'));
+    return $template->withLayout('dashboard')->render('pendapatan/index', compact('pendapatan', 'tahun', 'proyek', 'summary'));
 })->with('auth');
 
 $router->get('/pendapatan/add', function () use ($template, $db) {
@@ -782,8 +783,9 @@ $router->get('/pendapatan/:id/delete', function ($id) use ($db) {
 $router->get('/pengeluaran', function () use ($template, $db) {
     $jenis = $db->table('pengeluaran')->select('jenis')->groupBy('jenis')->column('jenis');
     $pengeluaran = $db->table('pengeluaran')->findAll();
+    $summary = $db->table('pengeluaran')->select('YEAR(tanggal) AS tahun, SUM(nominal) AS total')->groupBy('YEAR(tanggal)')->findAll();
 
-    return $template->withLayout('dashboard')->render('pengeluaran/index', compact('pengeluaran', 'jenis'));
+    return $template->withLayout('dashboard')->render('pengeluaran/index', compact('pengeluaran', 'jenis', 'summary'));
 })->with('auth');
 
 $router->get('/pengeluaran/add', function () use ($template) {

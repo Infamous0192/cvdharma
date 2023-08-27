@@ -4,11 +4,9 @@
     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
         <h5>Tabel Pengawasan</h5>
 
-        <?php if ($_SESSION['level'] == 'admin') : ?>
-            <a href="<?= Router::baseUrl('/pengawasan/add') ?>" class="btn btn-sm btn-primary">
-                <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Data
-            </a>
-        <?php endif; ?>
+        <a href="<?= Router::baseUrl('/pengawasan/add') ?>" class="btn btn-sm btn-primary">
+            <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Data
+        </a>
     </div>
 
     <div class="card-body p-0">

@@ -4,11 +4,9 @@
     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
         <h5>Tabel Pengeluaran</h5>
 
-        <?php if ($_SESSION['level'] == 'admin') : ?>
-            <a href="<?= Router::baseUrl('/pengeluaran/add') ?>" class="btn btn-sm btn-primary">
-                <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Data
-            </a>
-        <?php endif; ?>
+        <a href="<?= Router::baseUrl('/pengeluaran/add') ?>" class="btn btn-sm btn-primary">
+            <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Data
+        </a>
     </div>
 
     <div class="table-responsive text-nowrap">
@@ -53,6 +51,11 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+
+    <div class="p-4 mt-5">
+
+        <div id="chart"></div>
     </div>
 </div>
 
@@ -100,4 +103,41 @@
             .search(filterValue)
             .draw();
     });
+
+    $(document).ready(function() {
+        const summary = <?= json_encode($summary) ?>;
+
+        var options = {
+            series: [{
+                name: "Total",
+                data: summary.map(({ total }) => total)
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'Pendapatan per Tahun',
+                align: 'left'
+            },
+            xaxis: {
+                categories: summary.map(({
+                    tahun
+                }) => tahun),
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+    })
 </script>
