@@ -61,6 +61,36 @@ $router->post('/login', function () use ($db) {
     return Redirect::to('/');
 });
 
+$router->get('/register', function () use ($template, $db) {
+    if (Session::has('username')) {
+        Redirect::to('/');
+    }
+
+    return $template->withLayout('auth')->render('register');
+});
+
+$router->post('/register', function () use ($db) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $user = $db->table('pengguna')->where('username', "'$username'")->find();
+    if ($user != null) {
+        return Redirect::withMessage('error', 'Username telah digunakan')->back();
+    }
+
+    $db->table('pengguna')
+        ->insert([
+            'username' => $username,
+            'password' => $password,
+            'level' => 'pegawai'
+        ]);
+
+    Session::set('username', $username);
+    Session::set('level', 'pegawai');
+
+    return Redirect::to('/');
+});
+
 $router->get('/logout', function () {
     Session::destroy();
 

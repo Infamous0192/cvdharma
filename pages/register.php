@@ -1,5 +1,5 @@
 <h4 class="mb-2">Selamat datang! 👋</h4>
-<p class="mb-4">Silahkan login terlebih dahulu</p>
+<p class="mb-4">Silahkan daftar terlebih dahulu</p>
 
 <?php if (Session::has('error')) : ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -8,7 +8,7 @@
     </div>
 <?php endif ?>
 
-<form class="mb-3" action="login" method="POST">
+<form class="mb-3" action="register" method="POST">
     <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" id="username" name="username" placeholder="Username" required />
@@ -23,13 +23,13 @@
         </div>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary d-grid w-100" name="Submit" type="submit">Masuk</button>
+        <button class="btn btn-primary d-grid w-100" name="Submit" type="submit">Daftar</button>
     </div>
 </form>
 
 <p class="text-center">
-    <span>Belum punya akun?</span>
-    <a href="register">
-        <span>Daftar</span>
+    <span>Sudah punya akun?</span>
+    <a href="login">
+        <span>Masuk</span>
     </a>
 </p>
